@@ -1,1 +1,98 @@
-/* You CSS goes in here */
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #8ff;
+}
+
+#menu {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    padding: 20px;
+    /* width: 60%; */
+    /* text-align: left; */
+    background-color: 	#110c11;
+}
+
+.element {
+    width: 120px;
+    height: 160px;
+    /* box-shadow: 0px 0px 12px rgba(0,255,255,0.5); */
+    border: 1px solid rgba(127,255,255,0.25);
+    font-family: Helvetica, sans-serif;
+    text-align: left;
+    line-height: normal;
+    cursor: default;
+}
+
+.element:hover {
+    box-shadow: 0px 0px 12px #605052;
+    border: 1px solid #605052;
+}
+
+    .element .number {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 12px;
+        color:#605052;
+    }
+
+    .element .symbol {
+        position: absolute;
+        top: 40px;
+        left: 0px;
+        right: 0px;
+        font-size: 60px;
+        font-weight: bold;
+        color: #605052;
+        text-shadow: 0 0 10px #605052;
+    }
+
+    .element .details {
+        position: absolute;
+        bottom: 15px;
+        left: 0px;
+        right: 0px;
+        font-size: 12px;
+        color: #605052;
+    }
+
+button {
+    color: whitesmoke;
+    background:	#211a23;
+    /* outline: 1px solid #605052; */
+    border: 0px;
+    margin-left: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    display: inline-block;
+    width: 300px;
+    text-align: left;
+    
+}
+
+button:hover {
+    background-color: rgba(0,255,255,0.5);
+}
+
+button:active {
+    color: #000000;
+    background-color: rgba(0,255,255,0.75);
+}
+
+input {
+    color: whitesmoke;
+    background: 	#211a23;
+    /* outline: 1px solid rgba(127,255,255,0.75); */
+    border: 0px;
+    padding: 5px 10px;
+    cursor: pointer;
+    align-self: left;
+    display: inline-block;
+    margin-left: 10px;
+}
+

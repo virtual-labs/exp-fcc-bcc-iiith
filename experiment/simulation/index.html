@@ -1,13 +1,66 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
-</head>
-<body>
-		<!-- Your code goes here-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" />
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
-</body>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.142.0/build/three.module.js",
+          "threeOC": "https://unpkg.com/three@0.142.0/examples/jsm/controls/OrbitControls.js"
+        }
+      }
+    </script>
+
+    <script type="module" src="js/three.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <div id="menu">
+      <button id="AddAtom">ADD ATOM</button>
+      <button id="SelectAtom">SELECT ATOMS</button>
+      <div>-</div>
+
+      <button id="SelectRegion">SELECT REGION</button>
+      <button id="SelectAll">SELECT ALL ATOMS</button>
+      <div>-</div>
+      <button id="CheckSC">CHECK FOR SIMPLE CUBIC PACKING</button>
+      <div>---</div>
+      <form onsubmit="return false" id="addatom">
+        <input type="text" name="x" value="1" size="1" />
+        <input type="text" name="y" value="1" size="1" />
+        <input type="text" name="z" value="1" size="1" />
+        <button id="AddAtomByCoordinate">ADD ATOM AT A COORDINATE</button>
+      </form>
+      <div>---</div>
+      <form onsubmit="return false" id="repeat">
+        <input type="text" name="x" value="1" size="1" />
+        <input type="text" name="y" value="1" size="1" />
+        <input type="text" name="z" value="1" size="1" />
+        <button id="RepeatSelectedPattern">REPEAT SELECTED PATTERN ONCE</button>
+      </form>
+      <div>---</div>
+      <form onsubmit="return false" id="translate">
+        <input type="text" name="x" value="1" size="1" />
+        <input type="text" name="y" value="1" size="1" />
+        <input type="text" name="z" value="1" size="1" />
+        <input type="text" name="c" value="10" size="1" />
+        <button id="TranslatePattern">TRANSLATE PATTERN</button>
+      </form>
+      <div>---</div>
+      <form onsubmit="return false" id="move">
+        <input type="text" name="x" value="1" size="1" />
+        <input type="text" name="y" value="1" size="1" />
+        <input type="text" name="z" value="1" size="1" />
+        <button id="MoveSelectedPattern">MOVE SELECTED PATTERN</button>
+      </form>
+    </div>
+  </body>
 </html>
+
