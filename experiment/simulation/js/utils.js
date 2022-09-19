@@ -24,13 +24,21 @@ export function addSphere(mouse, camera, scene) {
     return sphereMesh;
 }
 
-export function addSphereAtCoordinate(AddVec) {
+export function addSphereAtCoordinate(AddVec, atomtype = "default") {
+    var atomcolor = 0x00ffff;
+    var atomopacity = 1.0;
+    if (atomtype == "dummy") {
+        atomcolor = 0x746c70;
+        atomopacity = 0.3;
+    }
     const sphereMesh = new THREE.Mesh(
         new THREE.SphereGeometry(1, 20, 20),
         new THREE.MeshStandardMaterial({
-            color: 0x00ffff,
+            color: atomcolor,
             name: "sphere",
             roughness: 5,
+            transparent: true,
+            opacity: atomopacity,
         })
     );
     sphereMesh.position.copy(AddVec);

@@ -85,6 +85,7 @@ let action = "";
 var atomList = [];
 
 var SelectAtomList = [];
+var BoundaryAtomList = [];
 // listen to the mouse up
 document.addEventListener("mouseup", function (event) {
     if (drag == false) {
@@ -93,20 +94,35 @@ document.addEventListener("mouseup", function (event) {
             var newSphere = addSphere(mouse, camera, scene);
             scene.add(newSphere);
             atomList.push(newSphere);
-        }
-        else if (action == "selectAtom") {
+        } else if (action == "selectAtom") {
             INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED);
             if (INTERSECTED) {
                 SelectAtomList.push(INTERSECTED);
             }
-        }
-        else if(action == "selectAll"){
+        } else if (action == "selectAll") {
             SelectAtomList = [];
-            for (let i = 0 ; i < atomList.length; i++){
-                SelectAtomList.push(atomList[i])
+            for (let i = 0; i < atomList.length; i++) {
+                SelectAtomList.push(atomList[i]);
+            }
+        } else if (action == "selectRegion") {
+            INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED);
+            if (INTERSECTED) {
+                BoundaryAtomList.push(INTERSECTED);
             }
         }
-    
+    }
+});
+
+// select region enclosed between the atoms
+
+const selectRegion = document.getElementById("SelectRegion");
+selectRegion.addEventListener("click", function () {
+    console.log("selecting region");
+    if (action != "selectRegion") {
+        action = "selectRegion";
+    } else {
+        action = "";
+        BoundaryAtomList = [];
     }
 });
 
@@ -154,7 +170,6 @@ addCheckSC.addEventListener("click", function () {
 });
 
 // respond to add atom by coordinate
-
 const formAdd = document.getElementById("addatom");
 formAdd.addEventListener("submit", function () {
     console.log("adding atom");
@@ -165,7 +180,23 @@ formAdd.addEventListener("submit", function () {
         parseFloat(vec[2].value)
     );
     var addedatom = addSphereAtCoordinate(AddVec);
-    console.log(AddVec,addedatom);
+    console.log(AddVec, addedatom);
+    scene.add(addedatom);
+    atomList.push(addedatom);
+});
+
+// respond to add dummy atom by coordinate
+const formAdddummy = document.getElementById("adddummyatom");
+formAdddummy.addEventListener("submit", function () {
+    console.log("adding dummy atom");
+    var vec = formAdddummy.elements;
+    var AddVec = new THREE.Vector3(
+        parseFloat(vec[0].value),
+        parseFloat(vec[1].value),
+        parseFloat(vec[2].value)
+    );
+    var addedatom = addSphereAtCoordinate(AddVec, "dummy");
+    console.log(AddVec, addedatom);
     scene.add(addedatom);
     atomList.push(addedatom);
 });
@@ -234,7 +265,8 @@ window.addEventListener("resize", () => {
 
 // render the scene and animate
 var render = function () {
-    console.log(action,atomList, SelectAtomList, scene.children);
+    // console.log(action, atomList, SelectAtomList, BoundaryAtomList);
+    console.log(BoundaryAtomList);
     highlightSelectList(SelectAtomList, atomList);
     updateButtonCSS(action);
     INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED);
