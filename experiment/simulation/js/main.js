@@ -1,5 +1,6 @@
 // import * as THREE from 'three';
-import { OrbitControls } from "threeOC";
+import { OrbitControls } from "./orbit.js";
+import * as THREE from "./three.js";
 import {
     AddLight,
     addSphere,
@@ -12,6 +13,7 @@ import {
     highlightSelectList,
     moveSelectList,
     checkSCP,
+    select_Region,
 } from "./utils.js";
 
 // import { RectAreaLightHelper } from 'threeRectAreaLightHelper';
@@ -23,7 +25,7 @@ var camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 );
-camera.position.set(10, 10, 20);
+camera.position.set(10, 10, 10);
 
 // init the renderer and the scene
 var scene = new THREE.Scene();
@@ -86,44 +88,23 @@ var atomList = [];
 
 var SelectAtomList = [];
 var BoundaryAtomList = [];
-// listen to the mouse up
-document.addEventListener("mouseup", function (event) {
-    if (drag == false) {
-        // if the action is add atom
-        if (action == "addAtom") {
-            var newSphere = addSphere(mouse, camera, scene);
-            scene.add(newSphere);
-            atomList.push(newSphere);
-        } else if (action == "selectAtom") {
-            INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED);
-            if (INTERSECTED) {
-                SelectAtomList.push(INTERSECTED);
-            }
-        } else if (action == "selectAll") {
-            SelectAtomList = [];
-            for (let i = 0; i < atomList.length; i++) {
-                SelectAtomList.push(atomList[i]);
-            }
-        } else if (action == "selectRegion") {
-            INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED);
-            if (INTERSECTED) {
-                BoundaryAtomList.push(INTERSECTED);
-            }
-        }
-    }
-});
+
+
+var currentatom = document.getElementById("atomtype");
+var atomtype = currentatom.options[currentatom.selectedIndex].text;
+
 
 // select region enclosed between the atoms
-
 const selectRegion = document.getElementById("SelectRegion");
 selectRegion.addEventListener("click", function () {
-    console.log("selecting region");
-    if (action != "selectRegion") {
-        action = "selectRegion";
-    } else {
-        action = "";
-        BoundaryAtomList = [];
+    let vals = select_Region(SelectAtomList,atomList);
+    let hullmesh = vals.mesh;
+    let arr = vals.selectarray;
+    for(let i=0;i<arr.length;i++) {
+        SelectAtomList.push(arr[i]);
     }
+    console.log(hullmesh);
+    scene.add(hullmesh);
 });
 
 // respond to click addAtom
@@ -179,7 +160,7 @@ formAdd.addEventListener("submit", function () {
         parseFloat(vec[1].value),
         parseFloat(vec[2].value)
     );
-    var addedatom = addSphereAtCoordinate(AddVec);
+    var addedatom = addSphereAtCoordinate(AddVec, atomtype);
     console.log(AddVec, addedatom);
     scene.add(addedatom);
     atomList.push(addedatom);
@@ -263,10 +244,35 @@ window.addEventListener("resize", () => {
     camera.updateProjectionMatrix();
 });
 
+document.addEventListener("mouseup", function (event) {
+    if (drag == false) {
+        // if the action is add atom
+        if (action == "addAtom") {
+            var newSphere = addSphere(mouse, atomtype,  camera, scene);
+            scene.add(newSphere);
+            atomList.push(newSphere);
+        } else if (action == "selectAtom") {
+            INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED);
+            if (INTERSECTED) {
+                SelectAtomList.push(INTERSECTED);
+            }
+        } else if (action == "selectAll") {
+            SelectAtomList = [];
+            for (let i = 0; i < atomList.length; i++) {
+                SelectAtomList.push(atomList[i]);
+            }
+        } 
+    }
+});
+
+
 // render the scene and animate
 var render = function () {
     // console.log(action, atomList, SelectAtomList, BoundaryAtomList);
-    console.log(BoundaryAtomList);
+    //console.log(BoundaryAtomList);
+    currentatom = document.getElementById("atomtype");
+    atomtype = currentatom.options[currentatom.selectedIndex].text;
+    console.log(atomtype);
     highlightSelectList(SelectAtomList, atomList);
     updateButtonCSS(action);
     INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED);

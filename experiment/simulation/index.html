@@ -10,19 +10,36 @@
   </head>
   <body>
     <div id="container"></div>
-
+<!--
     <script type="importmap">
       {
         "imports": {
           "three": "https://unpkg.com/three@0.142.0/build/three.module.js",
-          "threeOC": "https://unpkg.com/three@0.142.0/examples/jsm/controls/OrbitControls.js"
+          "threeOC": "https://unpkg.com/three@0.142.0/examples/jsm/controls/OrbitControls.js",
+          "ConvexGeometry":  "https://unpkg.com/three@0.142.0/examples/jsm/geometries/ConvexGeometry.js",
+          "ConvexHull": "https://unpkg.com/browse/three@0.142.0/examples/jsm/math/ConvexHull.js"
         }
       }
     </script>
-
+  -->
     <script type="module" src="js/three.js"></script>
+    <script type="module" src="js/orbit.js"></script>
     <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/convex.js"></script>
+    <script type="module" src="js/hull.js"></script>
     <div id="menu">
+
+      
+      <select name="atomtype" id="atomtype">
+        <!-- Zn, Cl, Cs, S, Na, C -->
+        <option value="Zn">Zn</option>
+        <option value="Cl">Cl</option>
+        <option value="Cs">Cs</option>
+        <option value="S">S</option>
+        <option value="Na">Na</option>
+        <option value="C">C</option>
+      </select>
+
       <button id="AddAtom">ADD ATOM</button>
       <button id="SelectAtom">SELECT ATOMS</button>
       <div>-</div>

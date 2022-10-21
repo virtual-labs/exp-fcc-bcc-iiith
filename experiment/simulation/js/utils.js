@@ -1,8 +1,38 @@
-import * as THREE from "three";
-import { TextureLoader } from "three";
-import { OrbitControls } from "threeOC";
+import * as THREE from "./three.js";
+import { ConvexGeometry } from "./convex.js"
+import { ConvexHull } from "./hull.js"
 
-export function addSphere(mouse, camera, scene) {
+var trueTypeOf = (obj) => Object.prototype.toString.call(obj).slice(8, -1).toLowerCase()
+
+var radius_scale = 1/100;
+var atomDetails = {
+    Zn: {
+    radius: 135,
+    color: "#a9a9a9"
+    },
+    Cl: {
+    radius: 100,
+    color: "#cfe942"
+    },
+    Cs: {
+    radius: 260,
+    color: "#ffd700"
+    },
+    S: {
+    radius: 100,
+    color: "#ffff00"
+    },
+    Na:{
+    radius: 180,
+    color: "#fcfcfc"
+    },
+    C:{
+    radius: 70,
+    color: "#8fce00"
+    }
+    }
+
+export function addSphere(mouse, atomname, camera, scene) {
     var intersectionPoint = new THREE.Vector3();
     var planeNormal = new THREE.Vector3();
     var plane = new THREE.Plane();
@@ -11,10 +41,11 @@ export function addSphere(mouse, camera, scene) {
     plane.setFromNormalAndCoplanarPoint(planeNormal, scene.position);
     raycaster.setFromCamera(mouse, camera);
     raycaster.ray.intersectPlane(plane, intersectionPoint);
+    // console.log(atomDetails[atomname]);
     const sphereMesh = new THREE.Mesh(
-        new THREE.SphereGeometry(1, 20, 20),
+        new THREE.SphereGeometry(atomDetails[atomname].radius * radius_scale, 20, 20),
         new THREE.MeshStandardMaterial({
-            color: 0x00ffff,
+            color: atomDetails[atomname].color,
             name: "sphere",
             roughness: 5,
         })
@@ -24,15 +55,15 @@ export function addSphere(mouse, camera, scene) {
     return sphereMesh;
 }
 
-export function addSphereAtCoordinate(AddVec, atomtype = "default") {
-    var atomcolor = 0x00ffff;
+export function addSphereAtCoordinate(AddVec, atomname, atomtype = "default") {
+    var atomcolor = atomDetails[atomname].color;
     var atomopacity = 1.0;
     if (atomtype == "dummy") {
         atomcolor = 0x746c70;
         atomopacity = 0.3;
     }
     const sphereMesh = new THREE.Mesh(
-        new THREE.SphereGeometry(1, 20, 20),
+        new THREE.SphereGeometry(atomDetails[atomname].radius * radius_scale, 20, 20),
         new THREE.MeshStandardMaterial({
             color: atomcolor,
             name: "sphere",
@@ -100,15 +131,19 @@ export function RepeatPattern(SelectAtomList, repeatVec) {
         var curAtom = SelectAtomList[i];
         var newpos = curAtom.position.clone();
         // var translateVec = new THREE.Vector3(1, 1, 1);
+        console.log("SIII");
+        console.log(curAtom);
         newpos.add(repeatVec);
-        var sphereMesh = new THREE.Mesh(
-            new THREE.SphereGeometry(1, 20, 20),
-            new THREE.MeshStandardMaterial({
-                color: 0x00ffff,
-                name: "sphere",
-                roughness: 0,
-            })
-        );
+        var sphereMesh = curAtom.clone();
+        console.log(sphereMesh);
+        // var sphereMesh = new THREE.Mesh(
+        //     new THREE.SphereGeometry(1, 20, 20),
+        //     new THREE.MeshStandardMaterial({
+        //         color: 0x00ffff,
+        //         name: "sphere",
+        //         roughness: 0,
+        //     })
+        // );
         sphereMesh.position.copy(newpos);
         newAtoms.push(sphereMesh);
     }
@@ -126,14 +161,15 @@ export function TranslatePattern(SelectAtomList, translateVec, count) {
             translateVec.multiplyScalar(count);
             newpos.add(translateVec);
 
-            var sphereMesh = new THREE.Mesh(
-                new THREE.SphereGeometry(1, 20, 20),
-                new THREE.MeshStandardMaterial({
-                    color: 0x00ffff,
-                    name: "sphere",
-                    roughness: 0,
-                })
-            );
+            var sphereMesh = curAtom.clone();
+            // var sphereMesh = new THREE.Mesh(
+            //     new THREE.SphereGeometry(1, 20, 20),
+            //     new THREE.MeshStandardMaterial({
+            //         color: 0x00ffff,
+            //         name: "sphere",
+            //         roughness: 0,
+            //     })
+            // );
             sphereMesh.position.copy(newpos);
             newAtoms.push(sphereMesh);
             translateVec.multiplyScalar(1 / count);
@@ -212,4 +248,31 @@ export function checkSCP(SelectAtomList) {
         }
     }
     return true;
+}
+
+export function select_Region(SelectAtomList, atomList) {
+    let posarray = [];
+    var pos = new THREE.Vector3();
+    for(let i=0;i<SelectAtomList.length;i++) {
+        pos = SelectAtomList[i].position.clone();
+        posarray.push(pos);
+    }
+    let selectarray = []
+    var convexHull = new ConvexHull().setFromPoints(posarray);
+    for (let i=0;i<atomList.length;i++) {
+        pos = atomList[i].position.clone();
+        if(convexHull.containsPoint(pos)) {
+            selectarray.push(atomList[i]);
+        }
+    }
+    const geometry = new ConvexGeometry( posarray );
+    const material = new THREE.MeshStandardMaterial({
+        color: 0xff44ff,
+        roughness: 5,
+        transparent: true,
+        opacity: 0.3,
+        side: THREE.DoubleSide,
+    })
+    const mesh = new THREE.Mesh( geometry, material );
+    return {mesh,selectarray};
 }
