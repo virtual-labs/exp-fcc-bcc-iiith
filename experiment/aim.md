@@ -1,1 +1,1 @@
-### Aim of the experiment
+### Identifying lattices from repeating patterns
