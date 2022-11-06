@@ -1,1 +1,1 @@
-## Experiment name
+## What is a lattice?
