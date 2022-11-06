@@ -1,98 +1,254 @@
-*{
-    margin: 0;
+.page {
+    overflow: hidden;
+} 
+
+.smol-font {
+   font-size: x-small; 
+}
+
+.v-datalist-container {
+    height: 100%;
     padding: 0;
 }
 
-a {
-    color: #8ff;
+.v-instruction-container {
+    width: 80%;
+    margin: 0 auto;
 }
 
-#menu {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
+.v-canvas-container {
+    width: 100%;
+    height: 100%;
+    min-height: 900px;
+    border: none;
+}
+
+.v-slider-full {
+    width: 80%;
+	margin: auto;
+}
+
+.input-form {
+    display: none;
+    color: black;
+}
+
+.add {
+    font-size: 0.90rem;
+}
+
+.left {
+    order: 1;
+}
+
+.exp {
+    order: 2;
+}
+
+.right {
+    order: 3;
+}
+
+@media screen and (max-width: 800px) {
+    .left {
+        order: 1;
+        
+    }
+
+    .right {
+        order: 2;
+    }
+
+    .exp {
+        order: 3;
+    }
+}
+
+#top-border {
+    border-top: 1px solid black;
+    margin: 0.5rem;
+}
+
+.smol-wid {
+    width: 20%;
+    /* margin: 0.1rem; */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 15% auto;
+    /* background-color: rgb(0, 0, 0); */
+    /* background-color: rgba(0, 0, 0, 0.4); */
+}
+
+#disp-heading { 
+    margin: 0.5rem;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
     padding: 20px;
-    /* width: 60%; */
-    /* text-align: left; */
-    background-color: 	#110c11;
+    border: 1px solid #888;
+    width: 80%;
 }
 
-.element {
-    width: 120px;
-    height: 160px;
-    /* box-shadow: 0px 0px 12px rgba(0,255,255,0.5); */
-    border: 1px solid rgba(127,255,255,0.25);
-    font-family: Helvetica, sans-serif;
-    text-align: left;
-    line-height: normal;
-    cursor: default;
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-.element:hover {
-    box-shadow: 0px 0px 12px #605052;
-    border: 1px solid #605052;
-}
-
-    .element .number {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 12px;
-        color:#605052;
-    }
-
-    .element .symbol {
-        position: absolute;
-        top: 40px;
-        left: 0px;
-        right: 0px;
-        font-size: 60px;
-        font-weight: bold;
-        color: #605052;
-        text-shadow: 0 0 10px #605052;
-    }
-
-    .element .details {
-        position: absolute;
-        bottom: 15px;
-        left: 0px;
-        right: 0px;
-        font-size: 12px;
-        color: #605052;
-    }
-
-button {
-    color: whitesmoke;
-    background:	#211a23;
-    /* outline: 1px solid #605052; */
-    border: 0px;
-    margin-left: 10px;
-    padding: 5px 10px;
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
     cursor: pointer;
-    display: inline-block;
-    width: 300px;
-    text-align: left;
-    
 }
 
-button:hover {
-    background-color: rgba(0,255,255,0.5);
+#add-modal {
+    width: 50%;
+    margin: auto;
 }
 
-button:active {
-    color: #000000;
-    background-color: rgba(0,255,255,0.75);
+#edit-modal {
+    width: 50%;
+    margin: auto;
 }
 
-input {
-    color: whitesmoke;
-    background: 	#211a23;
-    /* outline: 1px solid rgba(127,255,255,0.75); */
-    border: 0px;
-    padding: 5px 10px;
-    cursor: pointer;
-    align-self: left;
-    display: inline-block;
-    margin-left: 10px;
+
+.v-datalist-title {
+    border-bottom: 0;
 }
 
+.v-collapsible-instruction-container {
+    width: 60%;
+    margin: auto;
+    border-radius: 0.25rem;
+}
+
+.v-collapsible {
+    width: 98%;
+    margin: auto;
+}
+
+.v-collapsible::after {
+    size: 1rem;
+}
+
+.v-button {
+    background-color: #04AA6D;
+    border-radius: 0.5rem;
+    font-size: small;
+    margin: 1rem;
+}
+
+.instr-font {
+    font-size: 0.9rem;
+}
+
+.coord-dim {
+    width: 100px;
+    margin: 0.25rem;
+}
+
+#add-shape-btn {
+    background-color: #3298dc;
+    border-radius: 0.5rem;
+}
+
+#edit-shape-btn {
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+
+#delete-shape-btn {
+    background-color: #f14668;
+    border-radius: 0.5rem;
+}
+
+#move-button {
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+
+#AddAtom {
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+#SelectAtom {
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+#SelectRegion {
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+#SelectAll {
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+#CheckSC {
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+#AddAtomByCoordinate {
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+#AddDummyAtomByCoordinate{
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+#RepeatSelectedPattern{
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+#TranslatePattern{
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+#MoveSelectedPattern{
+    background-color: #48c774;
+    border-radius: 0.5rem;
+}
+#set-rotation-axis {
+    background-color: #3298dc;
+    border-radius: 0.5rem;
+}
+
+#checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#checkboxes label {
+    margin: 0.3rem auto;
+
+    display: flex;
+    align-items: flex-start;
+    flex: 40%;
+}
+
+#lock-v #xy-grid #xz-grid #yz-grid {
+    margin: auto 0.1rem;
+    padding: auto 0.1rem;
+}
+
+.fields {
+	width: 50%;
+}
+
+.field-div {
+	margin: 1rem;
+}
