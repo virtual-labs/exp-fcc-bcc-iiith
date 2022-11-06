@@ -131,19 +131,12 @@ export function RepeatPattern(SelectAtomList, repeatVec) {
         var curAtom = SelectAtomList[i];
         var newpos = curAtom.position.clone();
         // var translateVec = new THREE.Vector3(1, 1, 1);
-        console.log("SIII");
-        console.log(curAtom);
+        // console.log("SIII");
+        // console.log(curAtom);
         newpos.add(repeatVec);
         var sphereMesh = curAtom.clone();
         console.log(sphereMesh);
-        // var sphereMesh = new THREE.Mesh(
-        //     new THREE.SphereGeometry(1, 20, 20),
-        //     new THREE.MeshStandardMaterial({
-        //         color: 0x00ffff,
-        //         name: "sphere",
-        //         roughness: 0,
-        //     })
-        // );
+   
         sphereMesh.position.copy(newpos);
         newAtoms.push(sphereMesh);
     }
@@ -162,14 +155,7 @@ export function TranslatePattern(SelectAtomList, translateVec, count) {
             newpos.add(translateVec);
 
             var sphereMesh = curAtom.clone();
-            // var sphereMesh = new THREE.Mesh(
-            //     new THREE.SphereGeometry(1, 20, 20),
-            //     new THREE.MeshStandardMaterial({
-            //         color: 0x00ffff,
-            //         name: "sphere",
-            //         roughness: 0,
-            //     })
-            // );
+          
             sphereMesh.position.copy(newpos);
             newAtoms.push(sphereMesh);
             translateVec.multiplyScalar(1 / count);
@@ -182,22 +168,22 @@ export function TranslatePattern(SelectAtomList, translateVec, count) {
 }
 
 export function updateButtonCSS(action) {
-    if (action == "addAtom") {
-        document.getElementById("AddAtom").style =
-            "background-color: rgba(0,255,255,0.75); color: #000000 ";
-        document.getElementById("SelectAtom").style =
-            "color: rgba(127,255,255,0.75);background: transparent; outline: 1px solid rgba(127,255,255,0.75);border: 0px;padding: 5px 10px;cursor: pointer;";
-    } else if (action == "selectAtom") {
-        document.getElementById("SelectAtom").style =
-            "background-color: rgba(0,255,255,0.75); color: #000000 ";
-        document.getElementById("AddAtom").style =
-            "color: rgba(127,255,255,0.75);background: transparent; outline: 1px solid rgba(127,255,255,0.75);border: 0px;padding: 5px 10px;cursor: pointer;";
-    } else {
-        document.getElementById("AddAtom").style =
-            "color: rgba(127,255,255,0.75);background: transparent; outline: 1px solid rgba(127,255,255,0.75);border: 0px;padding: 5px 10px;cursor: pointer;";
-        document.getElementById("SelectAtom").style =
-            "color: rgba(127,255,255,0.75);background: transparent; outline: 1px solid rgba(127,255,255,0.75);border: 0px;padding: 5px 10px;cursor: pointer;";
-    }
+    // if (action == "addAtom") {
+    //     document.getElementById("AddAtom").style =
+    //         "background-color:  #f14668; color: #000000 ";
+    //     document.getElementById("SelectAtom").style =
+    //         "color:  #f14668; background: transparent; outline: 1px solid  #f14668; border: 0px;padding: 5px 10px;cursor: pointer;";
+    // } else if (action == "selectAtom") {
+    //     document.getElementById("SelectAtom").style =
+    //         "background-color:  #f14668; ; color: #000000 ";
+    //     document.getElementById("AddAtom").style =
+    //         "color:  #f14668; ;background: transparent; outline: 1px solid  #f14668; ;border: 0px;padding: 5px 10px;cursor: pointer;";
+    // } else {
+    //     document.getElementById("AddAtom").style =
+    //         "color:  #f14668;background: transparent; outline: 1px solid  #f14668; border: 0px;padding: 5px 10px;cursor: pointer;";
+    //     document.getElementById("SelectAtom").style =
+    //         "color:  #f14668; background: transparent; outline: 1px solid  #f14668; border: 0px;padding: 5px 10px;cursor: pointer;";
+    // }
 }
 function containsObject(obj, list) {
     var i;
