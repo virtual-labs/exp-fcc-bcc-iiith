@@ -21,10 +21,8 @@
     height: 100%;
     min-height: 900px;
     border: none;
-<<<<<<< HEAD
-=======
+
     position: static;
->>>>>>> dev
 }
 
 .v-slider-full {
@@ -131,8 +129,7 @@
 
 .v-datalist-title {
     border-bottom: 0;
-<<<<<<< HEAD
-=======
+
 }
 
 .v-collapsible-instruction-container {
@@ -257,7 +254,6 @@
 
 .field-div {
 	margin: 1rem;
->>>>>>> dev
 }
 
 .v-collapsible-instruction-container {
