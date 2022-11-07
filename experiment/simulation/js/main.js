@@ -16,28 +16,34 @@ import {
     select_Region,
 } from "./utils.js";
 
-// import { RectAreaLightHelper } from 'threeRectAreaLightHelper';
-// import { RectAreaLightUniformsLib } from 'threeRectAreaLightUniformsLib';
+
+
+
+
+var container = document.getElementById( 'canvas-main' );
 //  init camera
 var camera = new THREE.PerspectiveCamera(
     75, //FOV
-    window.innerWidth / window.innerHeight, //aspect ratio
+    container.offsetWidth / container.offsetHeight, //aspect ratio
     0.1,
     1000
 );
-camera.position.set(10, 10, 10);
+camera.position.set(50, 50, 50);
 
 // init the renderer and the scene
+
 var scene = new THREE.Scene();
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setClearColor("#000000");
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(container.offsetWidth, container.offsetHeight);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-document.body.appendChild(renderer.domElement);
+// document.body.appendChild(renderer.domElement);
+container.appendChild( renderer.domElement );
 
+// console.log(window);
 // initialize the axes
-var axesHelper = new THREE.AxesHelper(window.innerHeight);
+var axesHelper = new THREE.AxesHelper(container.clientHeight);
 scene.add(axesHelper);
 
 // add light to the  system
@@ -58,9 +64,13 @@ let INTERSECTED;
 
 function getMouseCoords(event) {
     var mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    mouse.x = ( ( event.clientX - renderer.domElement.offsetLeft ) / renderer.domElement.clientWidth ) * 2 - 1;
+    mouse.y = - ( ( event.clientY - renderer.domElement.offsetTop ) / renderer.domElement.clientHeight ) * 2 + 1;
+    // mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    // mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    console.log(mouse);
     return mouse;
+    
 }
 var mouse = new THREE.Vector2();
 //  detect mouse click
@@ -239,8 +249,8 @@ formMove.addEventListener("submit", function () {
 
 // make the window responsive
 window.addEventListener("resize", () => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
+    renderer.setSize(container.offsetWidth, container.offsetHeight);
+    camera.aspect = container.offsetWidth / container.offsetHeight;
     camera.updateProjectionMatrix();
 });
 
@@ -272,7 +282,6 @@ var render = function () {
     //console.log(BoundaryAtomList);
     currentatom = document.getElementById("atomtype");
     atomtype = currentatom.options[currentatom.selectedIndex].text;
-    console.log(atomtype);
     highlightSelectList(SelectAtomList, atomList);
     updateButtonCSS(action);
     INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED);
