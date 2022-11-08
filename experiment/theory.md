@@ -11,17 +11,16 @@ The simplest example for a Bravais lattice in three dimensions is a cubic lattic
 <p align="center">
   <img src="./images/cubic-lattice.png" alt="Cubic Lattice"/>
 </p>
-<<<<<<< HEAD
 
 ### Primitive vectors
 Primitive vectors are the vectors with which a Bravais lattice can be re-constructed. Formally, a Bravais lattice (in three dimensions) can be defined with primitive vectors, as a collection of all and only those points in space that are reachable from origin with the position vectors defined as
 $$\bar r = n_{1}\bar a_{1} + n_{2}\bar a_{2} + n_{3}\bar a_{3}$$
 where it is necessary for $n_{1}$, $n_{2}$, $n_{3}$ to be $0$ or a negative/positive integer. The three vectors used above are the **primitive vectors**.
-=======
+
 ## Primitive vectors
 Primitive vectors are the vectors with which a Bravais lattice can be re-constructed. Formally, a Bravais lattice (in three dimensions) can be defined with primitive vectors, as a collection of all and only those points in space that are reachable from origin with the position vectors defined as
 $$\bar r = n_{1}\bar a_{1} + n_{2}\bar a_{2} + n_{3}\bar a_{3}$$
 where it is necessary for $n_{1}$, $n_{2}$, $n_{3}$ to be $0$ or a negative/positive integer. 
 The three vectors used above are the **primitive vectors**.
->>>>>>> dev
+
 This experiment now aims at giving an understanding of defining primitive vectors.
