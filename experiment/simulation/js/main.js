@@ -200,6 +200,7 @@ NextButton.addEventListener('click', function () {
 const CheckLattice = document.getElementById('CheckLattice')
 CheckLattice.addEventListener('click', function () {
   console.log('Check Lattice Clicked')
+  curr_latticeID = LatticeList.indexOf(currentLattice);
   if(curr_latticeID == 0) {
     var vectorList = []
     var dist = []
