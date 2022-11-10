@@ -2,38 +2,88 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "How many primitive vectors does a Bravais lattice of n dimenions have?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "1",
+        "b": "n-1",
+        "c": "n",
+        "d": "n/2"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
-      },
-      "correctAnswer": "a",
-      "difficulty": "beginner"
-    },
-    {
-      "question": "This is a Sample Question 2?",
-      "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
-      },
-      "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "A Bravais lattice of n dimensions has n primitive vectors"
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
+    },
+    {
+      "question": "How many primitive vectors does the honeycomb lattice have?",
+      "answers": {
+        "a": "2",
+        "b": "3",
+        "c": "1",
+        "d": "None"
+      },
+      "explanations": {
+        "d": "Honeycomb lattice has no primitve vectors"
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+        {
+      "question": "If the edge length of a simple cubic lattice is "a" and the radius of atoms is "r", then which of these relations is correct?",
+      "answers": {
+        "a": "a = r",
+        "b": "a = (r/2)",
+        "c": "a = 2r",
+        "d": "None of the above"
+      },
+      "explanations": {
+        "c": "An edge of a simple cubic lattice has only 2 atoms. Hence the sum of radius of these two atoms must be equal to the edge length"
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+        {
+      "question": "Look up about brick wall lattice. Is it a Bravais lattice?",
+      "answers": {
+        "a": "Yes",
+        "b": "It is not in most cases",
+        "c": "No",
+        "d": "All of the above"
+      },
+      "explanations": {
+        "c": "The standard brick wall lattice is not a Bravais lattice"
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+        {
+      "question": "What are the angles between the primitive vectors of a BCC?(in degrees)",
+      "answers": {
+        "a": "90,90,54.7",
+        "b": "90,45,90",
+        "c": "60,60,60",
+        "d": "None of the above"
+      },
+      "explanations": {
+        "a": "The primitive vectors are along [1,0,0],[0,1,0],[0.5,0.5,0.5]"
+      },
+      "correctAnswer": "a",
+      "difficulty": "advanced"
+    },
+        {
+      "question": "What are the angles between the primitive vectors of a FCC?(in degrees)",
+      "answers": {
+        "a": "90,90,54.7",
+        "b": "75,75,75",
+        "c": "60,60,60",
+        "d": "None of the above"
+      },
+      "explanations": {
+        "c": "The primitive vectors are along [1,1,0],[1,0,1],[0,1,1]"
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
     }
   ]
 }
