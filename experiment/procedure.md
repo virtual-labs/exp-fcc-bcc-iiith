@@ -10,7 +10,7 @@ Primtive vectors can usually be found with ease for simple lattices, usually the
 <br> <br>
 The steps to the experiment are given below
 - The interface will contain a canvas in which the different finite lattices in question are shown.
-- The interface contains buttons to move to next/previous lattice, a button to select atoms (which is a toggle switch) and a button to check the choice made.
+- The interface contains a dropdown to select lattice, a button to select atoms (which is a toggle switch) and a button to check the choice made.
 - Usually, a lattice point is chosen to be the origin of these primitve vectors and the vectors are drawn out from there. But in this experiment, such a concept does not exist.
 - It is expected that atoms are selected sequentially as head and tail of primitive vectors of the lattice and that all atoms are **unique**. It is expected that different atoms which have similar surroundings to the so called origin lattice point is chosen and then a corresponding lattice point is chosen which together creates one primitve vector.
 - Even though the vectors obtained do not have a common origin, they are brought to a common origin during evaluation of the selection, retaining the validity of the selection if the magnitudes and directions of the vectors obtained are correct.
