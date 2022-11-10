@@ -30,7 +30,7 @@
       "difficulty": "beginner"
     },
         {
-      "question": "If the edge length of a simple cubic lattice is "a" and the radius of atoms is "r", then which of these relations is correct?",
+      "question": "If the edge length of a simple cubic lattice is \"a\" and the radius of atoms is \"r\", then which of these relations is correct?",
       "answers": {
         "a": "a = r",
         "b": "a = (r/2)",
