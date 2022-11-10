@@ -20,19 +20,24 @@
                 <div class="v-collapsible">Instructions</div>
                 <div id="procedure-message" class="v-content">
                     <li class="instr-font">
-                        The arrows to the sides of the name of the lattice should be used for navigating between different lattices
+                        The arrows to the sides of the name of the lattice should be used for
+                        navigating between different lattices
                     </li>
                     <li class="instr-font">
-                        Left click and drag to move the camera around. You can use the mouse scroll wheel to zoom in or zoom out.
+                        Left click and drag to move the camera around. You can use the mouse scroll
+                        wheel to zoom in or zoom out.
                     </li>
                     <li class="instr-font">
-                        To select atoms, click on the select atoms button. It is to be noted that the select atoms button is a toggle switch.
-                        Once you have made your choice, click on the check vectors button to get the result of your choice.
+                        To select atoms, click on the select atoms button. It is to be noted that
+                        the select atoms button is a toggle switch. Once you have made your choice,
+                        click on the check vectors button to get the result of your choice.
                     </li>
                     <li class="instr-font">
-                        Please select in order, atoms which you think make up the primitive vectors. Since an atom selected once cannot be used for
-                        multiple vectors, select other atoms which are in the same surroundings. The first two atoms are considered to be the head and tail 
-                        of first vector and so on. Hence make your choices accordingly.
+                        Please select in order, atoms which you think make up the primitive vectors.
+                        Since an atom selected once cannot be used for multiple vectors, select
+                        other atoms which are in the same surroundings. The first two atoms are
+                        considered to be the head and tail of first vector and so on. Hence make
+                        your choices accordingly.
                     </li>
                 </div>
             </div>
@@ -45,21 +50,29 @@
                 <div class="v-datalist-container">
                     <div class="v-datalist-row">
                         <div class="v-datalist-title" id="disp-heading">Navigate Lattices</div>
-                        <button
+                        <!-- <button
                             id="prev-btn"
                             style="margin: 0.25rem"
                             class="v-button is-small is-responsive is-info"
                         >
                             <
-                        </button>
-                        <label id="current-lattice"> Square Lattice </label>
-                        <button
+                        </button> -->
+                        <!-- <label id="current-lattice"> Square Lattice </label> -->
+                        <select id="LatticeList">
+                            <option value="Square Lattice">Square Lattice</option>
+                            <option value="Rectangular Lattice">Rectangular Lattice</option>
+                            <option value="Cubic Lattice">Cubic Lattice</option>
+                            <option value="BCC Lattice">BCC Lattice</option>
+                            <option value="FCC Lattice">FCC Lattice</option>
+                            <option value="Honeycomb Lattice">Honeycomb Lattice</option>
+                        </select>
+                        <!-- <button
                             id="next-btn"
                             style="margin: 0.25rem"
                             class="v-button is-small is-responsive is-danger"
                         >
                             >
-                        </button>
+                        </button> -->
                     </div>
 
                     <div class="v-datalist-row" id="top-border">
@@ -112,4 +125,3 @@
         <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
     </body>
 </html>
-
