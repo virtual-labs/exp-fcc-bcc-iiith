@@ -32,7 +32,7 @@
       "difficulty": "beginner"
     },
         {
-      "question": "Which of these are Bravais lattices??",
+      "question": "Which of these are Bravais lattices?",
       "answers": {
         "a": "Square lattice",
         "b": "Cubic lattice",
@@ -76,7 +76,7 @@
       "difficulty": "advanced"
     },
         {
-      "question": "Which of these is a necessity for a primitive vector",
+      "question": "Which of these is a necessity for a primitive vector?",
       "answers": {
         "a": "The magnitude of the vector needs to be equal to the minimal distance between lattice points",
         "b": "Angle between two primitive vectors has to be less than or equal to 90 degrees",
