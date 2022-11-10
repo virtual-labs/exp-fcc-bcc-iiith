@@ -2,38 +2,92 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "What is a Bravais lattice?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "A regular arrangement of atoms in a crystal",
+        "b": "A lattice that follows the Bravais rules",
+        "c": "A repeating pattern of arrangement of atoms with all points being equivalent",
+        "d": "None of the above"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Not all regular arrangement of atoms can be classfied as a Bravais lattice",
+        "c": "This is the correct definition of a Bravais lattice"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What are lattice points?",
+      "answers": {
+        "a": "Points that make a lattice are called latice points",
+        "b": "Atoms that belong to a Bravais lattice",
+        "c": "Both (a) and (b)",
+        "d": "None of the above"
+      },
+      "explanations": {
+        "a": "This is the correct definition",
+        "b": "Atoms do not need to belong to a Bravais lattice to be lattice points in general"
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
-    {
-      "question": "This is a Sample Question 2?",
+        {
+      "question": "Which of these are Bravais lattices??",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "Square lattice",
+        "b": "Cubic lattice",
+        "c": "Rectangular lattice",
+        "d": "All of above"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "d": "All the lattices mentioned here are standard two dimensional Bravais lattices"
       },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
+      "correctAnswer": "d",
+      "difficulty": "intermediate"
+    },
+        {
+      "question": "With regard to primitive vectors, which of these options are true?",
+      "answers": {
+        "a": "They are vectors that are perpendicular to each other",
+        "b": "They are the vectors that can be used to re-construct a Bravais lattice",
+        "c": "Bravais lattices necessarily have 3 primitve vectors",
+        "d": "All of the above"
+      },
+      "explanations": {
+        "a": "Primitive vectors need not be perpendicular to each other",
+        "c": "A Bravais lattice of two dimensions only has 2 primitive vectors"
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+        {
+      "question": "For a cubic lattice with dimensions of 1 unit, which of these vectors can be used as primitive vectors? (Assuming that the origin is at (0,0,0))",
+      "answers": {
+        "a": "[0.5,0,0],[0,0.5,0],[0,0,0.5]",
+        "b": "[1,0,0],[0,1,0],[0,0,1]",
+        "c": "[-1,0,0],[0,-1,0],[0,0,-1]",
+        "d": "Both (b) and (c)"
+      },
+      "explanations": {
+        "a": "Using these primitive vectors reaches to points in space that do not contain lattice points",
+        "d": "Both these choices can reach every lattice point"
+      },
+      "correctAnswer": "d",
+      "difficulty": "advanced"
+    },
+        {
+      "question": "Which of these is a necessity for a primitive vector",
+      "answers": {
+        "a": "The magnitude of the vector needs to be equal to the minimal distance between lattice points",
+        "b": "Angle between two primitive vectors has to be less than or equal to 90 degrees",
+        "c": "Both (a) and (b)",
+        "d": "None of the above"
+      },
+      "explanations": {
+        "a": "In the case where the linear combination only involves that one primitve vector, then there should necessarily be a lattice point there"
+      },
+      "correctAnswer": "a",
+      "difficulty": "advanced"
     }
   ]
 }
