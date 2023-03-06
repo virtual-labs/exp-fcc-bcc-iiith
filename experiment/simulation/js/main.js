@@ -28,29 +28,15 @@ var perspective_camera = new THREE.PerspectiveCamera(
   1000,
 )
 var cam_pos = 0
-var orthographic_camera = new THREE.OrthographicCamera( 10 / - 2, 10 / 2, 30 / 2, 30 / - 2, 1, 1000 );
+var orthographic_camera = new THREE.OrthographicCamera(
+  10 / -2,
+  10 / 2,
+  30 / 2,
+  30 / -2,
+  1,
+  1000,
+)
 var camera = perspective_camera
-camera.position.set(25, 15, 25)
-let Checked = document.getElementById('ToggleCamera')
-Checked.addEventListener('click', function() {
-  console.log('Clicked camera toggle')
-  if(Checked.checked) {
-    console.log("yes")
-    camera = orthographic_camera
-    cam_pos = 1
-  }
-  else{
-    console.log("no")
-    camera = perspective_camera
-    cam_pos = 0
-  }
-})
-// CameraMode.addEventListener('click', function() {
-//   console.log('Clicked camera toggle')
-//   if(CameraMode.checked) {
-//     console.log("yes")
-//   }
-// })
 
 // init the renderer and the scene
 
@@ -63,7 +49,9 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap
 // document.body.appendChild(renderer.domElement);
 container.appendChild(renderer.domElement)
 
-// console.log(window);
+// init the orbit controls
+var controls = new OrbitControls(camera, renderer.domElement)
+
 // initialize the axes
 var axesHelper = new THREE.AxesHelper(container.clientHeight)
 scene.add(axesHelper)
@@ -73,13 +61,39 @@ const lights = AddLight()
 for (let i = 0; i < lights.length; i++) {
   scene.add(lights[i])
 }
-// init the orbit controls
-var controls = new OrbitControls(camera, renderer.domElement)
-controls.update()
-controls.autoRotate = true
-controls.autoRotateSpeed = 0
-controls.enablePan = false
-controls.enableDamping = true
+let Checked = document.getElementById('ToggleCamera')
+Checked.addEventListener('click', function () {
+  console.log('Clicked camera toggle')
+  if (Checked.checked) {
+    console.log('yes')
+    camera = orthographic_camera
+    controls = new OrbitControls(camera, renderer.domElement)
+    cam_pos = 1
+    controls.update()
+    controls.autoRotate = true
+    controls.autoRotateSpeed = 0
+    controls.enablePan = false
+    controls.enableDamping = true
+    camera.position.set(25, 15, 25)
+  } else {
+    console.log('no')
+    camera = perspective_camera
+    controls = new OrbitControls(camera, renderer.domElement)
+    cam_pos = 0
+    controls.update()
+    controls.autoRotate = true
+    controls.autoRotateSpeed = 0
+    controls.enablePan = false
+    controls.enableDamping = true
+    camera.position.set(25, 15, 25)
+  }
+})
+// CameraMode.addEventListener('click', function() {
+//   console.log('Clicked camera toggle')
+//   if(CameraMode.checked) {
+//     console.log("yes")
+//   }
+// })
 
 // to check the current object which keyboard points to
 let INTERSECTED
@@ -202,46 +216,40 @@ currentLatticeElement.addEventListener('click', function () {
   }
   atomList = []
   currentAtomList = createLattice(LatticeList.indexOf(currentLattice))
-  if(LatticeList.indexOf(currentLattice)==0) {
-    if(cam_pos == 0) {
+  if (LatticeList.indexOf(currentLattice) == 0) {
+    if (cam_pos == 0) {
       camera.position.set(25, 15, 25)
-    }
-    else {
+    } else {
       camera.position.set(50, 50, 50)
     }
-  } else if(LatticeList.indexOf(currentLattice)==1) {
-    if(cam_pos == 0) {
+  } else if (LatticeList.indexOf(currentLattice) == 1) {
+    if (cam_pos == 0) {
       camera.position.set(30, 25, 30)
-    }
-    else {
+    } else {
       camera.position.set(50, 50, 50)
     }
-  } else if(LatticeList.indexOf(currentLattice)==2) {
-    if(cam_pos == 0) {
+  } else if (LatticeList.indexOf(currentLattice) == 2) {
+    if (cam_pos == 0) {
       camera.position.set(15, 15, 15)
-    }
-    else {
+    } else {
       camera.position.set(50, 50, 50)
     }
-  } else if(LatticeList.indexOf(currentLattice)==3) {
-    if(cam_pos == 0) {
+  } else if (LatticeList.indexOf(currentLattice) == 3) {
+    if (cam_pos == 0) {
       camera.position.set(30, 30, 30)
-    }
-    else {
+    } else {
       camera.position.set(50, 50, 50)
     }
-  } else if(LatticeList.indexOf(currentLattice)==4) {
-    if(cam_pos == 0) {
+  } else if (LatticeList.indexOf(currentLattice) == 4) {
+    if (cam_pos == 0) {
       camera.position.set(20, 20, 20)
-    }
-    else {
+    } else {
       camera.position.set(50, 50, 50)
     }
-  } else if(LatticeList.indexOf(currentLattice)==5) {
-    if(cam_pos == 0) {
+  } else if (LatticeList.indexOf(currentLattice) == 5) {
+    if (cam_pos == 0) {
       camera.position.set(30, 35, 50)
-    }
-    else {
+    } else {
       camera.position.set(50, 50, 50)
     }
   }
@@ -297,7 +305,7 @@ const ClearLattice = document.getElementById('ClearSelection')
 ClearLattice.addEventListener('click', function () {
   console.log('Clear selection clicked')
   SelectAtomList = []
-  for(let i=0; i < VectorList.length;i++) {
+  for (let i = 0; i < VectorList.length; i++) {
     scene.remove(VectorList[i])
   }
   VectorList = []
@@ -748,37 +756,41 @@ document.addEventListener('mouseup', function (event) {
       //console.log(INTERSECTED)
       if (SelectAtomList.includes(INTERSECTED)) {
         var ind = SelectAtomList.indexOf(INTERSECTED)
-        if(ind > -1 && ind == SelectAtomList.length - 1 && ind % 2 == 0) {
-          SelectAtomList.splice(ind,1)
-        }
-        else if (ind > -1 && ind % 2 == 1) {
+        if (ind > -1 && ind == SelectAtomList.length - 1 && ind % 2 == 0) {
+          SelectAtomList.splice(ind, 1)
+        } else if (ind > -1 && ind % 2 == 1) {
           var target_ind = (ind - 1) / 2
           var arrow_to_remove = VectorList[target_ind]
           scene.remove(arrow_to_remove)
-          VectorList.splice(target_ind,1)
-          SelectAtomList.splice(ind,1)
-        }
-        else if(ind > -1 && ind % 2 == 0) {
-          console.log("here")
-          var target_ind = (ind) / 2
+          VectorList.splice(target_ind, 1)
+          SelectAtomList.splice(ind, 1)
+        } else if (ind > -1 && ind % 2 == 0) {
+          console.log('here')
+          var target_ind = ind / 2
           var arrow_to_remove = VectorList[target_ind]
           scene.remove(arrow_to_remove)
-          VectorList.splice(target_ind,1)
-          SelectAtomList.splice(ind,1)          
+          VectorList.splice(target_ind, 1)
+          SelectAtomList.splice(ind, 1)
         }
-      }
-      else if(INTERSECTED) {
+      } else if (INTERSECTED) {
         SelectAtomList.push(INTERSECTED)
-        if(SelectAtomList.length % 2 == 0) {
-          console.log("yes")
-          var tail = SelectAtomList[SelectAtomList.length-2]
-          var head = SelectAtomList[SelectAtomList.length-1]
+        if (SelectAtomList.length % 2 == 0) {
+          console.log('yes')
+          var tail = SelectAtomList[SelectAtomList.length - 2]
+          var head = SelectAtomList[SelectAtomList.length - 1]
           var tail_pos = tail.position.clone()
           var head_pos = head.position.clone()
-          console.log(tail_pos,head_pos)
-          var dir = new THREE.Vector3();
-          dir.subVectors( head_pos, tail_pos ).normalize();
-          const arrow = new THREE.ArrowHelper(dir, tail_pos, head_pos.distanceTo(tail_pos), 0xffffff, 0.3 *head_pos.distanceTo(tail_pos), 0.2 * head_pos.distanceTo(tail_pos))
+          console.log(tail_pos, head_pos)
+          var dir = new THREE.Vector3()
+          dir.subVectors(head_pos, tail_pos).normalize()
+          const arrow = new THREE.ArrowHelper(
+            dir,
+            tail_pos,
+            head_pos.distanceTo(tail_pos),
+            0xffffff,
+            0.3 * head_pos.distanceTo(tail_pos),
+            0.2 * head_pos.distanceTo(tail_pos),
+          )
           VectorList.push(arrow)
           scene.add(arrow)
         }
