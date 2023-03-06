@@ -19,38 +19,44 @@ import {
   createLattice,
 } from './utils.js'
 
+// init container
 var container = document.getElementById('canvas-main')
-//  init camera
-var perspective_camera = new THREE.PerspectiveCamera(
-  75, //FOV
-  container.clientWidth / container.clientHeight, //aspect ratio
-  0.1,
-  1000,
-)
-var cam_pos = 0
-var orthographic_camera = new THREE.OrthographicCamera(
-  10 / -2,
-  10 / 2,
-  30 / 2,
-  30 / -2,
-  1,
-  1000,
-)
-var camera = perspective_camera
 
 // init the renderer and the scene
-
 var scene = new THREE.Scene()
 var renderer = new THREE.WebGLRenderer({ antialias: true })
 renderer.setClearColor('#000000')
 renderer.setSize(container.clientWidth, container.clientHeight)
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
-// document.body.appendChild(renderer.domElement);
 container.appendChild(renderer.domElement)
+
+// init perspective camera
+var camera_distance = 50
+var perspective_camera = new THREE.PerspectiveCamera(
+  camera_distance, //FOV
+  container.clientWidth / container.clientHeight, //aspect ratio
+  0.1,
+  1000,
+)
+var orthographic_camera = new THREE.OrthographicCamera(
+  camera_distance / -2,
+  camera_distance / 2,
+  camera_distance / 2,
+  camera_distance / -2,
+  1,
+  1000,
+)
+var camera = perspective_camera
 
 // init the orbit controls
 var controls = new OrbitControls(camera, renderer.domElement)
+controls.update()
+controls.autoRotate = true
+controls.autoRotateSpeed = 0
+controls.enablePan = false
+controls.enableDamping = true
+camera.position.set(25, 25, 25)
 
 // initialize the axes
 var axesHelper = new THREE.AxesHelper(container.clientHeight)
@@ -61,39 +67,24 @@ const lights = AddLight()
 for (let i = 0; i < lights.length; i++) {
   scene.add(lights[i])
 }
+
 let Checked = document.getElementById('ToggleCamera')
 Checked.addEventListener('click', function () {
   console.log('Clicked camera toggle')
   if (Checked.checked) {
-    console.log('yes')
     camera = orthographic_camera
     controls = new OrbitControls(camera, renderer.domElement)
-    cam_pos = 1
-    controls.update()
-    controls.autoRotate = true
-    controls.autoRotateSpeed = 0
-    controls.enablePan = false
-    controls.enableDamping = true
-    camera.position.set(25, 15, 25)
   } else {
-    console.log('no')
     camera = perspective_camera
     controls = new OrbitControls(camera, renderer.domElement)
-    cam_pos = 0
-    controls.update()
-    controls.autoRotate = true
-    controls.autoRotateSpeed = 0
-    controls.enablePan = false
-    controls.enableDamping = true
-    camera.position.set(25, 15, 25)
   }
+  controls.update()
+  controls.autoRotate = true
+  controls.autoRotateSpeed = 0
+  controls.enablePan = false
+  controls.enableDamping = true
+  camera.position.set(25, 25, 25)
 })
-// CameraMode.addEventListener('click', function() {
-//   console.log('Clicked camera toggle')
-//   if(CameraMode.checked) {
-//     console.log("yes")
-//   }
-// })
 
 // to check the current object which keyboard points to
 let INTERSECTED

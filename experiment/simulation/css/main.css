@@ -1,3 +1,10 @@
+html,
+body {
+  height: 95vh;
+}
+aside {
+  height: 90vh;
+}
 .page {
   overflow: hidden;
 }
@@ -9,8 +16,9 @@
 .v-datalist-container {
   height: 100%;
   padding: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
-
 .v-instruction-container {
   width: 80%;
   margin: 0 auto;
