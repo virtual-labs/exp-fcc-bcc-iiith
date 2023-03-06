@@ -48,7 +48,7 @@ var orthographic_camera = new THREE.OrthographicCamera(
   1000,
 )
 var camera = perspective_camera
-
+var cam_pos = 0
 // init the orbit controls
 var controls = new OrbitControls(camera, renderer.domElement)
 controls.update()
@@ -74,9 +74,11 @@ Checked.addEventListener('click', function () {
   if (Checked.checked) {
     camera = orthographic_camera
     controls = new OrbitControls(camera, renderer.domElement)
+    cam_pos = 1
   } else {
     camera = perspective_camera
     controls = new OrbitControls(camera, renderer.domElement)
+    cam_pos = 0
   }
   controls.update()
   controls.autoRotate = true
