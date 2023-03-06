@@ -165,16 +165,36 @@ var curr_latticeID = 0
 // });
 
 // respond to select a bunch of atoms
-const addSelectList = document.getElementById('SelectAtom')
-addSelectList.addEventListener('click', function () {
-  console.log('Selecting atom mode')
+let toggleselectbutton = document.getElementById('ToggleSelect')
+toggleselectbutton.addEventListener('click', function () {
   if (action != 'selectAtom') {
     action = 'selectAtom'
   } else {
     action = ''
-    SelectAtomList = []
+    // SelectAtomList = []
   }
 })
+
+const Slider = document.getElementById('radiiSlider')
+const sliderval = document.getElementById('radiisliderval')
+sliderval.innerHTML = Slider.valueAsNumber
+var currentradii = Slider.valueAsNumber
+
+Slider.oninput = function () {
+  currentradii = Slider.valueAsNumber
+  sliderval.innerHTML = Slider.valueAsNumber
+  var newatomlist = []
+
+  for (let i = 0; i < atomList.length; i++) {
+    var pos = atomList[i].position
+    let atom = addSphereAtCoordinate(pos, 'Y')
+    scene.remove(atomList[i])
+    scene.add(atom)
+    newatomlist.push(atom)
+  }
+  atomList = newatomlist
+  SelectAtomList = []
+}
 
 const LatticeList = [
   'Square Lattice',
@@ -789,7 +809,25 @@ document.addEventListener('mouseup', function (event) {
     }
   }
 })
-
+//delete atom
+document.addEventListener('keydown', function (event) {
+  var keyCode = event.key
+  if (keyCode == 'd') {
+    // DeleteObject(mouse, camera, scene, atomList, SelectAtomList, INTERSECTED)
+    INTERSECTED = CheckHover(mouse, camera, atomList)
+    if (INTERSECTED) {
+      var index = atomList.indexOf(INTERSECTED)
+      if (index > -1) {
+        atomList.splice(index, 1)
+      }
+      var index = SelectAtomList.indexOf(INTERSECTED)
+      if (index > -1) {
+        SelectAtomList.splice(index, 1)
+      }
+      scene.remove(INTERSECTED)
+    }
+  }
+})
 // render the scene and animate
 var render = function () {
   highlightSelectList(SelectAtomList, atomList)

@@ -55,12 +55,10 @@ export function addSphere(mouse, atomname, camera, scene) {
   raycaster.setFromCamera(mouse, camera)
   raycaster.ray.intersectPlane(plane, intersectionPoint)
   // console.log(atomDetails[atomname]);
+  const radii = document.getElementById('radiiSlider')
+  console.log('radiii is', radii.valueAsNumber)
   const sphereMesh = new THREE.Mesh(
-    new THREE.SphereGeometry(
-      atomDetails[atomname].radius * radius_scale,
-      20,
-      20,
-    ),
+    new THREE.SphereGeometry(radii.valueAsNumber, 20, 20),
     new THREE.MeshStandardMaterial({
       color: atomDetails[atomname].color,
       name: 'sphere',
@@ -79,12 +77,9 @@ export function addSphereAtCoordinate(AddVec, atomname, atomtype = 'default') {
     atomcolor = 0x746c70
     atomopacity = 0.3
   }
+  const radii = document.getElementById('radiiSlider')
   const sphereMesh = new THREE.Mesh(
-    new THREE.SphereGeometry(
-      atomDetails[atomname].radius * radius_scale,
-      20,
-      20,
-    ),
+    new THREE.SphereGeometry(radii.valueAsNumber, 20, 20),
     new THREE.MeshStandardMaterial({
       color: atomcolor,
       name: 'sphere',
@@ -424,7 +419,11 @@ export function createLattice(latticeID) {
         atomlist.push(atom1)
       }
     }
-    for (let x = -30 + Math.sqrt(3); x < latticedims[0]; x += 2 * Math.sqrt(3)) {
+    for (
+      let x = -30 + Math.sqrt(3);
+      x < latticedims[0];
+      x += 2 * Math.sqrt(3)
+    ) {
       for (let y = -27; y < latticedims[1]; y += 6) {
         let pos = new THREE.Vector3(x, 0, y)
         let atom = addSphereAtCoordinate(pos, 'Y')

@@ -66,6 +66,7 @@
                             <option value="FCC Lattice">FCC Lattice</option>
                             <option value="Honeycomb Lattice">Honeycomb Lattice</option>
                         </select>
+
                         <!-- <button
                             id="next-btn"
                             style="margin: 0.25rem"
@@ -76,23 +77,38 @@
                     </div>
 
                     <div class="v-datalist-row" id="top-border">
-                        <div class="v-datalist-title" id="disp-heading">
-                            Select the Lattice atoms
+                        <div>
+                            <div class="v-datalist-title" id="disp-heading">Toggle Select mode</div>
+                            <label class="switch">
+                                <input type="checkbox" id="ToggleSelect" />
+                                <span class="slider round"> </span>
+                            </label>
                         </div>
-                        <input
-                            class="button is-responsive is-small is-link"
-                            style="margin: 0.5rem"
-                            id="SelectAtom"
-                            type="submit"
-                            value="SELECT ATOMS"
-                        />
-                        <!-- <input
-                            class="button is-responsive is-small is-link"
-                            style="margin: 0.5rem"
-                            id="SelectRegion"
-                            type="hidden"
-                            value="SELECT REGION"
-                        /> -->
+                        <div>
+                            <div class="v-datalist-title" id="disp-heading">Toggle camera</div>
+                            <label class="switch">
+                                <input type="checkbox" id="ToggleCamera" />
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="v-datalist-row" id="top-border">
+                        <div class="v-datalist-title" id="disp-heading">
+                            Change radius of atoms using slider
+                        </div>
+
+                        <div class="slidecontainer">
+                            <input
+                                type="range"
+                                min="0.1"
+                                max="10"
+                                value="0.1"
+                                step="0.1"
+                                class="radiislider"
+                                id="radiiSlider"
+                            />
+                            <p>Value: <span id="radiisliderval"></span></p>
+                        </div>
                     </div>
                     <div class="v-datalist-row" id="top-border">
                         <div class="v-datalist-title" id="disp-heading">Check Selected Vectors</div>
@@ -115,13 +131,7 @@
                             value="CLEAR SELECTIONS"
                         />
                     </div>
-                    <div class="v-datalist-row" id="top-border">
-                        <div class="v-datalist-title" id="disp-heading">Toggle camera</div>
-                        <label class="switch">
-                            <input type="checkbox" id="ToggleCamera" />
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
+
                     <div class="v-datalist-row" id="top-border">
                         <div class="v-datalist-title" id="disp-heading">
                             <div id="output"></div>
