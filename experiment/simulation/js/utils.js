@@ -321,19 +321,19 @@ export function createLattice(latticeID) {
 
   if (latticeID == 3) {
     console.log('adding body centered cubic')
-    let latticedims = [32, 32, 32]
-    for (let x = 0; x < latticedims[0]; x += 4) {
-      for (let y = 0; y < latticedims[1]; y += 4) {
-        for (let z = 0; z < latticedims[2]; z += 4) {
+    let latticedims = [20, 20, 20]
+    for (let x = -16; x < latticedims[0]; x += 4) {
+      for (let y = -16; y < latticedims[1]; y += 4) {
+        for (let z = -16; z < latticedims[2]; z += 4) {
           let pos = new THREE.Vector3(x, y, z)
           let atom = addSphereAtCoordinate(pos, 'Y')
           atomlist.push(atom)
         }
       }
     }
-    for (let x = 2; x < latticedims[0]; x += 4) {
-      for (let y = 2; y < latticedims[1]; y += 4) {
-        for (let z = 2; z < latticedims[2]; z += 4) {
+    for (let x = -14; x < latticedims[0]; x += 4) {
+      for (let y = -14; y < latticedims[1]; y += 4) {
+        for (let z = -14; z < latticedims[2]; z += 4) {
           let pos = new THREE.Vector3(x, y, z)
           let atom = addSphereAtCoordinate(pos, 'Y')
           atomlist.push(atom)
@@ -342,10 +342,10 @@ export function createLattice(latticeID) {
     }
   } else if (latticeID == 2) {
     console.log('adding cubic lattice')
-    let latticedims = [16, 16, 16]
-    for (let x = 0; x < latticedims[0]; x += 2) {
-      for (let y = 0; y < latticedims[1]; y += 2) {
-        for (let z = 0; z < latticedims[2]; z += 2) {
+    let latticedims = [10, 10, 10]
+    for (let x = -8; x < latticedims[0]; x += 2) {
+      for (let y = -8; y < latticedims[1]; y += 2) {
+        for (let z = -8; z < latticedims[2]; z += 2) {
           let pos = new THREE.Vector3(x, y, z)
           let atom = addSphereAtCoordinate(pos, 'X')
           atomlist.push(atom)
@@ -354,9 +354,9 @@ export function createLattice(latticeID) {
     }
   } else if (latticeID == 1) {
     console.log('adding rectangle lattice')
-    let latticedims = [50, 20, 20]
-    for (let x = 0; x < latticedims[0]; x += 5) {
-      for (let y = 0; y < latticedims[1]; y += 2) {
+    let latticedims = [30, 20, 20]
+    for (let x = -25; x < latticedims[0]; x += 5) {
+      for (let y = -20; y < latticedims[1]; y += 2) {
         let pos = new THREE.Vector3(x, 0, y)
         let atom = addSphereAtCoordinate(pos, 'X')
         atomlist.push(atom)
@@ -365,8 +365,8 @@ export function createLattice(latticeID) {
   } else if (latticeID == 0) {
     console.log('adding square lattice')
     let latticedims = [20, 20, 20]
-    for (let x = 0; x < latticedims[0]; x += 2) {
-      for (let y = 0; y < latticedims[1]; y += 2) {
+    for (let x = -18; x < latticedims[0]; x += 2) {
+      for (let y = -18; y < latticedims[1]; y += 2) {
         let pos = new THREE.Vector3(x, 0, y)
         let atom = addSphereAtCoordinate(pos, 'X')
         atomlist.push(atom)
@@ -374,37 +374,37 @@ export function createLattice(latticeID) {
     }
   } else if (latticeID == 4) {
     console.log('adding face centered cubic')
-    let latticedims = [24, 24, 24]
-    for (let x = 0; x < latticedims[0]; x += 3) {
-      for (let y = 0; y < latticedims[1]; y += 3) {
-        for (let z = 0; z < latticedims[2]; z += 3) {
+    let latticedims = [12, 12, 12]
+    for (let x = -12; x < latticedims[0]; x += 3) {
+      for (let y = -12; y < latticedims[1]; y += 3) {
+        for (let z = -12; z < latticedims[2]; z += 3) {
           let pos = new THREE.Vector3(x, y, z)
           let atom = addSphereAtCoordinate(pos, 'X')
           atomlist.push(atom)
         }
       }
     }
-    for (let x = 1.5; x < latticedims[0]; x += 3) {
-      for (let y = 1.5; y < latticedims[1]; y += 3) {
-        for (let z = 0; z < latticedims[2]; z += 3) {
+    for (let x = -10.5; x < latticedims[0]; x += 3) {
+      for (let y = -10.5; y < latticedims[1]; y += 3) {
+        for (let z = -12; z < latticedims[2]; z += 3) {
           let pos = new THREE.Vector3(x, y, z)
           let atom = addSphereAtCoordinate(pos, 'X')
           atomlist.push(atom)
         }
       }
     }
-    for (let x = 1.5; x < latticedims[0]; x += 3) {
-      for (let y = 0; y < latticedims[1]; y += 3) {
-        for (let z = 1.5; z < latticedims[2]; z += 3) {
+    for (let x = -10.5; x < latticedims[0]; x += 3) {
+      for (let y = -12; y < latticedims[1]; y += 3) {
+        for (let z = -10.5; z < latticedims[2]; z += 3) {
           let pos = new THREE.Vector3(x, y, z)
           let atom = addSphereAtCoordinate(pos, 'X')
           atomlist.push(atom)
         }
       }
     }
-    for (let x = 0; x < latticedims[0]; x += 3) {
-      for (let y = 1.5; y < latticedims[1]; y += 3) {
-        for (let z = 1.5; z < latticedims[2]; z += 3) {
+    for (let x = -12; x < latticedims[0]; x += 3) {
+      for (let y = -10.5; y < latticedims[1]; y += 3) {
+        for (let z = -10.5; z < latticedims[2]; z += 3) {
           let pos = new THREE.Vector3(x, y, z)
           let atom = addSphereAtCoordinate(pos, 'X')
           atomlist.push(atom)
@@ -413,9 +413,9 @@ export function createLattice(latticeID) {
     }
   } else if (latticeID == 5) {
     console.log('adding honeycomb lattice')
-    let latticedims = [60, 60, 60]
-    for (let x = 0; x < latticedims[0]; x += 2 * Math.sqrt(3)) {
-      for (let y = 0; y < latticedims[1]; y += 6) {
+    let latticedims = [33, 33, 33]
+    for (let x = -30; x < latticedims[0]; x += 2 * Math.sqrt(3)) {
+      for (let y = -30; y < latticedims[1]; y += 6) {
         let pos = new THREE.Vector3(x, 0, y)
         let atom = addSphereAtCoordinate(pos, 'Y')
         atomlist.push(atom)
@@ -424,8 +424,8 @@ export function createLattice(latticeID) {
         atomlist.push(atom1)
       }
     }
-    for (let x = Math.sqrt(3); x < latticedims[0]; x += 2 * Math.sqrt(3)) {
-      for (let y = 3; y < latticedims[1]; y += 6) {
+    for (let x = -30 + Math.sqrt(3); x < latticedims[0]; x += 2 * Math.sqrt(3)) {
+      for (let y = -27; y < latticedims[1]; y += 6) {
         let pos = new THREE.Vector3(x, 0, y)
         let atom = addSphereAtCoordinate(pos, 'Y')
         atomlist.push(atom)
@@ -435,5 +435,7 @@ export function createLattice(latticeID) {
       }
     }
   }
+  //console.log("atomlist")
+  //console.log(atomlist)
   return atomlist
 }

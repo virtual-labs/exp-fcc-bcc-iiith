@@ -21,13 +21,36 @@ import {
 
 var container = document.getElementById('canvas-main')
 //  init camera
-var camera = new THREE.PerspectiveCamera(
+var perspective_camera = new THREE.PerspectiveCamera(
   75, //FOV
   container.clientWidth / container.clientHeight, //aspect ratio
   0.1,
   1000,
 )
-camera.position.set(50, 50, 50)
+var cam_pos = 0
+var orthographic_camera = new THREE.OrthographicCamera( 10 / - 2, 10 / 2, 30 / 2, 30 / - 2, 1, 1000 );
+var camera = perspective_camera
+camera.position.set(25, 15, 25)
+let Checked = document.getElementById('ToggleCamera')
+Checked.addEventListener('click', function() {
+  console.log('Clicked camera toggle')
+  if(Checked.checked) {
+    console.log("yes")
+    camera = orthographic_camera
+    cam_pos = 1
+  }
+  else{
+    console.log("no")
+    camera = perspective_camera
+    cam_pos = 0
+  }
+})
+// CameraMode.addEventListener('click', function() {
+//   console.log('Clicked camera toggle')
+//   if(CameraMode.checked) {
+//     console.log("yes")
+//   }
+// })
 
 // init the renderer and the scene
 
@@ -105,7 +128,7 @@ let action = ''
 
 // create a list of atoms in scene
 var atomList = []
-
+var VectorList = []
 var SelectAtomList = []
 var BoundaryAtomList = []
 var HullMeshList = []
@@ -179,9 +202,52 @@ currentLatticeElement.addEventListener('click', function () {
   }
   atomList = []
   currentAtomList = createLattice(LatticeList.indexOf(currentLattice))
-
+  if(LatticeList.indexOf(currentLattice)==0) {
+    if(cam_pos == 0) {
+      camera.position.set(25, 15, 25)
+    }
+    else {
+      camera.position.set(50, 50, 50)
+    }
+  } else if(LatticeList.indexOf(currentLattice)==1) {
+    if(cam_pos == 0) {
+      camera.position.set(30, 25, 30)
+    }
+    else {
+      camera.position.set(50, 50, 50)
+    }
+  } else if(LatticeList.indexOf(currentLattice)==2) {
+    if(cam_pos == 0) {
+      camera.position.set(15, 15, 15)
+    }
+    else {
+      camera.position.set(50, 50, 50)
+    }
+  } else if(LatticeList.indexOf(currentLattice)==3) {
+    if(cam_pos == 0) {
+      camera.position.set(30, 30, 30)
+    }
+    else {
+      camera.position.set(50, 50, 50)
+    }
+  } else if(LatticeList.indexOf(currentLattice)==4) {
+    if(cam_pos == 0) {
+      camera.position.set(20, 20, 20)
+    }
+    else {
+      camera.position.set(50, 50, 50)
+    }
+  } else if(LatticeList.indexOf(currentLattice)==5) {
+    if(cam_pos == 0) {
+      camera.position.set(30, 35, 50)
+    }
+    else {
+      camera.position.set(50, 50, 50)
+    }
+  }
   for (let i = 0; i < currentAtomList.length; i++) {
-    // console.log(currentAtomList[i])
+    //console.log("here")
+    //console.log(currentAtomList[i])
     scene.add(currentAtomList[i])
     atomList.push(currentAtomList[i])
   }
@@ -227,7 +293,24 @@ currentLatticeElement.addEventListener('click', function () {
 //     atomList.push(currentAtomList[i])
 //   }
 // })
+const ClearLattice = document.getElementById('ClearSelection')
+ClearLattice.addEventListener('click', function () {
+  console.log('Clear selection clicked')
+  SelectAtomList = []
+  for(let i=0; i < VectorList.length;i++) {
+    scene.remove(VectorList[i])
+  }
+  VectorList = []
+  //add vector removal here
+})
 
+// let CameraMode = document.getElementById('ToggleCamera')
+// CameraMode.addEventListener('click', function() {
+//   console.log('Clicked camera toggle')
+//   if(CameraMode.checked) {
+//     console.log("yes")
+//   }
+// })
 // respond to check selected lattice
 const CheckLattice = document.getElementById('CheckLattice')
 CheckLattice.addEventListener('click', function () {
@@ -662,8 +745,43 @@ document.addEventListener('mouseup', function (event) {
     // if the action is add atom
     if (action == 'selectAtom') {
       INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED)
-      if (INTERSECTED) {
+      //console.log(INTERSECTED)
+      if (SelectAtomList.includes(INTERSECTED)) {
+        var ind = SelectAtomList.indexOf(INTERSECTED)
+        if(ind > -1 && ind == SelectAtomList.length - 1 && ind % 2 == 0) {
+          SelectAtomList.splice(ind,1)
+        }
+        else if (ind > -1 && ind % 2 == 1) {
+          var target_ind = (ind - 1) / 2
+          var arrow_to_remove = VectorList[target_ind]
+          scene.remove(arrow_to_remove)
+          VectorList.splice(target_ind,1)
+          SelectAtomList.splice(ind,1)
+        }
+        else if(ind > -1 && ind % 2 == 0) {
+          console.log("here")
+          var target_ind = (ind) / 2
+          var arrow_to_remove = VectorList[target_ind]
+          scene.remove(arrow_to_remove)
+          VectorList.splice(target_ind,1)
+          SelectAtomList.splice(ind,1)          
+        }
+      }
+      else if(INTERSECTED) {
         SelectAtomList.push(INTERSECTED)
+        if(SelectAtomList.length % 2 == 0) {
+          console.log("yes")
+          var tail = SelectAtomList[SelectAtomList.length-2]
+          var head = SelectAtomList[SelectAtomList.length-1]
+          var tail_pos = tail.position.clone()
+          var head_pos = head.position.clone()
+          console.log(tail_pos,head_pos)
+          var dir = new THREE.Vector3();
+          dir.subVectors( head_pos, tail_pos ).normalize();
+          const arrow = new THREE.ArrowHelper(dir, tail_pos, head_pos.distanceTo(tail_pos), 0xffffff, 0.3 *head_pos.distanceTo(tail_pos), 0.2 * head_pos.distanceTo(tail_pos))
+          VectorList.push(arrow)
+          scene.add(arrow)
+        }
       }
     }
   }
