@@ -662,11 +662,11 @@ CheckLattice.addEventListener('click', function () {
 // translateList.addEventListener("click", function () {});
 
 // make the window responsive
-// window.addEventListener("resize", () => {
-//     renderer.setSize(container.clientWidth, container.clientHeight);
-//     camera.aspect = container.clientWidth / container.clientHeight;
-//     camera.updateProjectionMatrix();
-// });
+window.addEventListener('resize', () => {
+  renderer.setSize(container.clientWidth, container.clientHeight)
+  camera.aspect = container.clientWidth / container.clientHeight
+  camera.updateProjectionMatrix()
+})
 
 document.addEventListener('mouseup', function (event) {
   var pressType = event.button // 2 for right click, 0 for left clickl
