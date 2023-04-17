@@ -316,7 +316,7 @@ export function createLattice(latticeID) {
 
   if (latticeID == 3) {
     console.log('adding body centered cubic')
-    let latticedims = [20, 20, 20]
+    let latticedims = [10, 10, 10]
     for (let x = -16; x < latticedims[0]; x += 4) {
       for (let y = -16; y < latticedims[1]; y += 4) {
         for (let z = -16; z < latticedims[2]; z += 4) {
@@ -359,9 +359,9 @@ export function createLattice(latticeID) {
     }
   } else if (latticeID == 0) {
     console.log('adding square lattice')
-    let latticedims = [20, 20, 20]
-    for (let x = -18; x < latticedims[0]; x += 2) {
-      for (let y = -18; y < latticedims[1]; y += 2) {
+    let latticedims = [10, 10, 10]
+    for (let x = -9; x < latticedims[0]; x += 2) {
+      for (let y = -9; y < latticedims[1]; y += 2) {
         let pos = new THREE.Vector3(x, 0, y)
         let atom = addSphereAtCoordinate(pos, 'X')
         atomlist.push(atom)

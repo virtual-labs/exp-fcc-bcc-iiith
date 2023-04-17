@@ -1,1 +1,3 @@
-### Link your references in here
+## References
+1. Barrault, Rue & Honkala, Iiro & Hudry, Olivier & Lobstein, Antoine. (2002). General Bounds for Identifying Codes in Some Infinite Regular Graphs. J. Combin. 8. 10.37236/1583. 
+2. Xiao, Shaoping & Yang, Weixuan. (2007). A temperature‐related homogenization technique and its implementation in the meshfree particle method for nanoscale simulations. International Journal for Numerical Methods in Engineering. 69. 2099 - 2125. 10.1002/nme.1841. 

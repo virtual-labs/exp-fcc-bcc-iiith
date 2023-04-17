@@ -19,25 +19,24 @@
             <div class="v-collapsible-instruction-container">
                 <div class="v-collapsible">Instructions</div>
                 <div id="procedure-message" class="v-content">
-                    <li class="instr-font">
-                        The arrows to the sides of the name of the lattice should be used for
-                        navigating between different lattices
-                    </li>
+                    <li class="instr-font">Use the dropdown to select a lattice of your choice.</li>
                     <li class="instr-font">
                         Left click and drag to move the camera around. You can use the mouse scroll
-                        wheel to zoom in or zoom out.
+                        wheel to zoom in or zoom out. You can use the select camera button to switch
+                        between orthogonal and perspective cameras. You can use the slider to
+                        increase or decrease the radius of atoms for better visibility.
                     </li>
                     <li class="instr-font">
-                        To select atoms, click on the select atoms button. It is to be noted that
-                        the select atoms button is a toggle switch. Once you have made your choice,
-                        click on the check vectors button to get the result of your choice.
+                        To select atoms, click on the select atoms switch. It is to be noted that
+                        the select atoms option is a toggle switch. Left click to select, richt
+                        click to de-select in select mode. Once you have made your choice, click on
+                        the check vectors button to get the result of your choice.
                     </li>
                     <li class="instr-font">
                         Please select in order, atoms which you think make up the primitive vectors.
-                        Since an atom selected once cannot be used for multiple vectors, select
-                        other atoms which are in the same surroundings. The first two atoms are
-                        considered to be the head and tail of first vector and so on. Hence make
-                        your choices accordingly.
+                        The first two choices are considered to be the head and tail of first vector
+                        and so on. Hence make your choices accordingly. You can always use the clear
+                        selections button to clear all choices.
                     </li>
                 </div>
             </div>
@@ -102,7 +101,7 @@
                                 type="range"
                                 min="0.1"
                                 max="10"
-                                value="0.1"
+                                value="0.4"
                                 step="0.1"
                                 class="radiislider"
                                 id="radiiSlider"

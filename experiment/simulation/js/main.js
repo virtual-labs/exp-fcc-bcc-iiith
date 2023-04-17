@@ -25,7 +25,7 @@ var container = document.getElementById('canvas-main')
 // init the renderer and the scene
 var scene = new THREE.Scene()
 var renderer = new THREE.WebGLRenderer({ antialias: true })
-renderer.setClearColor('#000000')
+renderer.setClearColor('#171717')
 renderer.setSize(container.clientWidth, container.clientHeight)
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
@@ -85,7 +85,7 @@ Checked.addEventListener('click', function () {
   controls.autoRotateSpeed = 0
   controls.enablePan = false
   controls.enableDamping = true
-  camera.position.set(25, 25, 25)
+  camera.position.set(30, 30, 30)
 })
 
 // to check the current object which keyboard points to
@@ -141,31 +141,6 @@ var BoundaryAtomList = []
 var HullMeshList = []
 var curr_latticeID = 0
 
-// select region enclosed between the atoms
-// const selectRegion = document.getElementById('SelectRegion')
-// selectRegion.addEventListener('click', function () {
-//   let vals = select_Region(SelectAtomList, atomList)
-//   let hullmesh = vals.mesh
-//   let arr = vals.selectarray
-//   for (let i = 0; i < arr.length; i++) {
-//     SelectAtomList.push(arr[i])
-//   }
-//   console.log(hullmesh)
-//   scene.add(hullmesh)
-//   HullMeshList.push(hullmesh)
-// })
-
-// respond to click addAtom
-// const addSphereButton = document.getElementById("AddAtom");
-// addSphereButton.addEventListener("click", function () {
-//     console.log("adding atom mode");
-//     if (action != "addAtom") {
-//         action = "addAtom";
-//     } else {
-//         action = "";
-//     }
-// });
-
 // respond to select a bunch of atoms
 let toggleselectbutton = document.getElementById('ToggleSelect')
 toggleselectbutton.addEventListener('click', function () {
@@ -195,7 +170,17 @@ Slider.oninput = function () {
     newatomlist.push(atom)
   }
   atomList = newatomlist
-  SelectAtomList = []
+  var newSelectAtomList = []
+  for (let i = 0; i < SelectAtomList.length; i++) {
+    var pos1 = SelectAtomList[i].position
+    for (let j = 0; j < atomList.length; j++) {
+      var pos2 = atomList[j].position
+      if (JSON.stringify(pos1) === JSON.stringify(pos2)) {
+        newSelectAtomList.push(atomList[j])
+      }
+    }
+  }
+  SelectAtomList = newSelectAtomList
 }
 
 const LatticeList = [
@@ -213,107 +198,29 @@ var currentLattice =
 
 let currentAtomList = createLattice(LatticeList.indexOf(currentLattice))
 for (let i = 0; i < currentAtomList.length; i++) {
-  //   console.log(currentAtomList[i])
   scene.add(currentAtomList[i])
   atomList.push(currentAtomList[i])
 }
 currentLatticeElement.addEventListener('click', function () {
   currentLattice =
     currentLatticeElement.options[currentLatticeElement.selectedIndex].text
-  // console.log('lattice change to', currentLattice)
   for (let i = 0; i < currentAtomList.length; i++) {
-    scene.remove(currentAtomList[i])
+    scene.remove(atomList[i])
   }
+  atomList = []
   for (let i = 0; i < HullMeshList.length; i++) {
     scene.remove(HullMeshList[i])
   }
-  atomList = []
+  HullMeshList = []
+
   currentAtomList = createLattice(LatticeList.indexOf(currentLattice))
-  if (LatticeList.indexOf(currentLattice) == 0) {
-    if (cam_pos == 0) {
-      camera.position.set(25, 15, 25)
-    } else {
-      camera.position.set(50, 50, 50)
-    }
-  } else if (LatticeList.indexOf(currentLattice) == 1) {
-    if (cam_pos == 0) {
-      camera.position.set(30, 25, 30)
-    } else {
-      camera.position.set(50, 50, 50)
-    }
-  } else if (LatticeList.indexOf(currentLattice) == 2) {
-    if (cam_pos == 0) {
-      camera.position.set(15, 15, 15)
-    } else {
-      camera.position.set(50, 50, 50)
-    }
-  } else if (LatticeList.indexOf(currentLattice) == 3) {
-    if (cam_pos == 0) {
-      camera.position.set(30, 30, 30)
-    } else {
-      camera.position.set(50, 50, 50)
-    }
-  } else if (LatticeList.indexOf(currentLattice) == 4) {
-    if (cam_pos == 0) {
-      camera.position.set(20, 20, 20)
-    } else {
-      camera.position.set(50, 50, 50)
-    }
-  } else if (LatticeList.indexOf(currentLattice) == 5) {
-    if (cam_pos == 0) {
-      camera.position.set(30, 35, 50)
-    } else {
-      camera.position.set(50, 50, 50)
-    }
-  }
+
   for (let i = 0; i < currentAtomList.length; i++) {
-    //console.log("here")
-    //console.log(currentAtomList[i])
     scene.add(currentAtomList[i])
     atomList.push(currentAtomList[i])
   }
 })
 
-// respond to prev/next lattice buttons
-// const PrevButton = document.getElementById('prev-btn')
-// PrevButton.addEventListener('click', function () {
-//   console.log('Prev Button clicked')
-//   let latticeID = changeCurrentLatticePrev()
-//   curr_latticeID = latticeID
-//   for (let i = 0; i < currentAtomList.length; i++) {
-//     scene.remove(currentAtomList[i])
-//   }
-//   for (let i = 0; i < HullMeshList.length; i++) {
-//     scene.remove(HullMeshList[i])
-//   }
-//   atomList = []
-//   currentAtomList = createLattice(latticeID)
-
-//   for (let i = 0; i < currentAtomList.length; i++) {
-//     console.log(currentAtomList[i])
-//     scene.add(currentAtomList[i])
-//     atomList.push(currentAtomList[i])
-//   }
-// })
-// const NextButton = document.getElementById('next-btn')
-// NextButton.addEventListener('click', function () {
-//   console.log('Next Button clicked')
-//   let latticeID = changeCurrentLatticeNext()
-//   curr_latticeID = latticeID
-//   for (let i = 0; i < currentAtomList.length; i++) {
-//     scene.remove(currentAtomList[i])
-//   }
-//   for (let i = 0; i < HullMeshList.length; i++) {
-//     scene.remove(HullMeshList[i])
-//   }
-//   currentAtomList = createLattice(latticeID)
-//   atomList = []
-//   for (let i = 0; i < currentAtomList.length; i++) {
-//     console.log(currentAtomList[i])
-//     scene.add(currentAtomList[i])
-//     atomList.push(currentAtomList[i])
-//   }
-// })
 const ClearLattice = document.getElementById('ClearSelection')
 ClearLattice.addEventListener('click', function () {
   console.log('Clear selection clicked')
@@ -762,12 +669,13 @@ CheckLattice.addEventListener('click', function () {
 // });
 
 document.addEventListener('mouseup', function (event) {
+  var pressType = event.button // 2 for right click, 0 for left clickl
   if (drag == false) {
     // if the action is add atom
     if (action == 'selectAtom') {
       INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED)
       //console.log(INTERSECTED)
-      if (SelectAtomList.includes(INTERSECTED)) {
+      if (SelectAtomList.includes(INTERSECTED) && pressType == 2) {
         var ind = SelectAtomList.indexOf(INTERSECTED)
         if (ind > -1 && ind == SelectAtomList.length - 1 && ind % 2 == 0) {
           SelectAtomList.splice(ind, 1)
@@ -785,7 +693,7 @@ document.addEventListener('mouseup', function (event) {
           VectorList.splice(target_ind, 1)
           SelectAtomList.splice(ind, 1)
         }
-      } else if (INTERSECTED) {
+      } else if (INTERSECTED && pressType == 0) {
         SelectAtomList.push(INTERSECTED)
         if (SelectAtomList.length % 2 == 0) {
           console.log('yes')
