@@ -247,29 +247,31 @@ CheckLattice.addEventListener('click', function () {
 
   if (curr_latticeID == 0) {
     var vectorList = []
-    var dist = []
     if (SelectAtomList.length != 4) {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Please select correct number of atoms</span>"
       SelectAtomList = []
+      for(let i=0; i<VectorList.length;i++) {
+        scene.remove(VectorList[i])
+      }
     }
     for (let i = 0; i < 2; i++) {
       var atom1 = SelectAtomList[2 * i]
       var pos1 = atom1.position.clone()
       var atom2 = SelectAtomList[2 * i + 1]
       var pos2 = atom2.position.clone()
-      var neg = pos2.clone().multiplyScalar(-1)
-      var res = pos1.clone().add(neg)
-      var mag = res.length()
-      dist.push(mag)
-      var unit = res.clone().normalize()
-      vectorList.push(unit)
+      var neg = pos1.clone().multiplyScalar(-1)
+      var res = pos2.clone().add(neg)
+      vectorList.push(res)
     }
-    var cos_ang =
-      vectorList[0].dot(vectorList[1]) /
-      (vectorList[0].length() * vectorList[1].length())
-    if (cos_ang == 0 && dist[0] == 2 && dist[1] == 2) {
+    console.log(vectorList)
+    const latticeConstant = 2;
+    const determinant = vectorList[0].x * vectorList[1].z - vectorList[0].z * vectorList[1].x;
+    const latticeConstantSq = latticeConstant * latticeConstant;
+
+    //const crossProduct = new THREE.Vector3().crossVectors(vectorList[0], vectorList[1]);
+    if(Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON) {
       console.log('Correct choice')
       document.getElementById('output').innerHTML =
         "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
@@ -278,36 +280,35 @@ CheckLattice.addEventListener('click', function () {
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
       SelectAtomList = []
+      for(let i=0; i<VectorList.length;i++) {
+        scene.remove(VectorList[i])
+      }
     }
+
   } else if (curr_latticeID == 1) {
     var vectorList = []
-    var dist = []
     if (SelectAtomList.length != 4) {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Please select correct number of atoms</span>"
       SelectAtomList = []
+      for(let i=0; i<VectorList.length;i++) {
+        scene.remove(VectorList[i])
+      }
     }
     for (let i = 0; i < 2; i++) {
       var atom1 = SelectAtomList[2 * i]
       var pos1 = atom1.position.clone()
       var atom2 = SelectAtomList[2 * i + 1]
       var pos2 = atom2.position.clone()
-      var neg = pos2.clone().multiplyScalar(-1)
-      var res = pos1.clone().add(neg)
-      var mag = res.length()
-      dist.push(mag)
-      var unit = res.clone().normalize()
-      vectorList.push(unit)
+      var neg = pos1.clone().multiplyScalar(-1)
+      var res = pos2.clone().add(neg)
+      vectorList.push(res)
     }
-    var cos_ang =
-      vectorList[0].dot(vectorList[1]) /
-      (vectorList[0].length() * vectorList[1].length())
-    var check = 0
-    if ((dist[0] == 5 && dist[1] == 2) || (dist[0] == 2 && dist[1] == 5)) {
-      check = 1
-    }
-    if (cos_ang == 0 && check == 1) {
+    //console.log(vectorList)
+    const determinant = vectorList[0].x * vectorList[1].z - vectorList[0].z * vectorList[1].x;
+    const latticeConstantSq = 10
+    if(Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON) {
       console.log('Correct choice')
       document.getElementById('output').innerHTML =
         "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
@@ -316,6 +317,9 @@ CheckLattice.addEventListener('click', function () {
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
       SelectAtomList = []
+      for(let i=0; i<VectorList.length;i++) {
+        scene.remove(VectorList[i])
+      }
     }
   } else if (curr_latticeID == 2) {
     var vectorList = []
@@ -325,36 +329,22 @@ CheckLattice.addEventListener('click', function () {
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Please select correct number of atoms</span>"
       SelectAtomList = []
+      for(let i=0; i<VectorList.length;i++) {
+        scene.remove(VectorList[i])
+      }
     }
     for (let i = 0; i < 3; i++) {
       var atom1 = SelectAtomList[2 * i]
       var pos1 = atom1.position.clone()
       var atom2 = SelectAtomList[2 * i + 1]
       var pos2 = atom2.position.clone()
-      var neg = pos2.clone().multiplyScalar(-1)
-      var res = pos1.clone().add(neg)
-      var mag = res.length()
-      dist.push(mag)
-      var unit = res.clone().normalize()
-      vectorList.push(unit)
+      var neg = pos1.clone().multiplyScalar(-1)
+      var res = pos2.clone().add(neg)
+      vectorList.push(res)
     }
-    var cos_ang1 =
-      vectorList[0].dot(vectorList[1]) /
-      (vectorList[0].length() * vectorList[1].length())
-    var cos_ang2 =
-      vectorList[0].dot(vectorList[2]) /
-      (vectorList[0].length() * vectorList[2].length())
-    var cos_ang3 =
-      vectorList[2].dot(vectorList[1]) /
-      (vectorList[2].length() * vectorList[1].length())
-    if (
-      cos_ang1 == 0 &&
-      cos_ang2 == 0 &&
-      cos_ang3 == 0 &&
-      dist[0] == 2 &&
-      dist[1] == 2 &&
-      dist[2] == 2
-    ) {
+    const determinant = vectorList[0].dot(vectorList[1].cross(vectorList[2]));
+    const latticeConstantSq = 8
+    if(Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON) {
       console.log('Correct choice')
       document.getElementById('output').innerHTML =
         "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
@@ -363,6 +353,9 @@ CheckLattice.addEventListener('click', function () {
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
       SelectAtomList = []
+      for(let i=0; i<VectorList.length;i++) {
+        scene.remove(VectorList[i])
+      }
     }
   } else if (curr_latticeID == 3) {
     var vectorList = []
@@ -372,6 +365,9 @@ CheckLattice.addEventListener('click', function () {
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Please select correct number of atoms</span>"
       SelectAtomList = []
+      for(let i=0; i<VectorList.length;i++) {
+        scene.remove(VectorList[i])
+      }
     }
     for (let i = 0; i < 3; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -385,65 +381,20 @@ CheckLattice.addEventListener('click', function () {
       var unit = res.clone().normalize()
       vectorList.push(unit)
     }
-    var cos_ang1 =
-      vectorList[0].dot(vectorList[1]) /
-      (vectorList[0].length() * vectorList[1].length())
-    var cos_ang2 =
-      vectorList[0].dot(vectorList[2]) /
-      (vectorList[0].length() * vectorList[2].length())
-    var cos_ang3 =
-      vectorList[2].dot(vectorList[1]) /
-      (vectorList[2].length() * vectorList[1].length())
-    if (
-      cos_ang1 == 0 &&
-      Math.abs(cos_ang2) == 1 / Math.sqrt(3) &&
-      Math.abs(cos_ang3) == 1 / Math.sqrt(3)
-    ) {
-      if (dist[0] == 4 && dist[1] == 4 && dist[2] == 2 * Math.sqrt(3)) {
-        console.log('correct choice')
-        document.getElementById('output').innerHTML =
-          "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
-      } else {
-        console.log('try again')
-        document.getElementById('output').innerHTML =
-          "<span style='color: red;'>Wrong selection, please try again</span>"
-        SelectAtomList = []
-      }
-    } else if (
-      cos_ang2 == 0 &&
-      Math.abs(cos_ang1) == 1 / Math.sqrt(3) &&
-      Math.abs(cos_ang3) == 1 / Math.sqrt(3)
-    ) {
-      if (dist[0] == 4 && dist[2] == 4 && dist[1] == 2 * Math.sqrt(3)) {
-        console.log('correct choice')
-        document.getElementById('output').innerHTML =
-          "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
-      } else {
-        console.log('try again')
-        document.getElementById('output').innerHTML =
-          "<span style='color: red;'>Wrong selection, please try again</span>"
-        SelectAtomList = []
-      }
-    } else if (
-      cos_ang3 == 0 &&
-      Math.abs(cos_ang2) == 1 / Math.sqrt(3) &&
-      Math.abs(cos_ang1) == 1 / Math.sqrt(3)
-    ) {
-      if (dist[2] == 4 && dist[1] == 4 && dist[0] == 2 * Math.sqrt(3)) {
-        console.log('correct choice')
-        document.getElementById('output').innerHTML =
-          "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
-      } else {
-        console.log('try again')
-        document.getElementById('output').innerHTML =
-          "<span style='color: red;'>Wrong selection, please try again</span>"
-        SelectAtomList = []
-      }
+    const latticeConstant = 4
+    const V = Math.abs(vectorList[0].dot(vectorList[1].clone().cross(vectorList[2])))
+    if(Math.abs(V - Math.pow(latticeConstant, 3) / (2 * Math.sqrt(2))) < Number.EPSILON) {
+      console.log('Correct choice')
+      document.getElementById('output').innerHTML =
+        "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
     } else {
-      console.log('try again')
+      console.log('Try again')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
       SelectAtomList = []
+      for(let i=0; i<VectorList.length;i++) {
+        scene.remove(VectorList[i])
+      }
     }
   } else if (curr_latticeID == 4) {
     var vectorList = []
@@ -453,93 +404,34 @@ CheckLattice.addEventListener('click', function () {
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Please select correct number of atoms</span>"
       SelectAtomList = []
+      for(let i=0; i<VectorList.length;i++) {
+        scene.remove(VectorList[i])
+      }
     }
     for (let i = 0; i < 3; i++) {
       var atom1 = SelectAtomList[2 * i]
       var pos1 = atom1.position.clone()
       var atom2 = SelectAtomList[2 * i + 1]
       var pos2 = atom2.position.clone()
-      var neg = pos2.clone().multiplyScalar(-1)
-      var res = pos1.clone().add(neg)
-      var mag = res.length()
-      dist.push(mag)
-      var unit = res.clone().normalize()
-      vectorList.push(unit)
+      var neg = pos1.clone().multiplyScalar(-1)
+      var res = pos2.clone().add(neg)
+      vectorList.push(res)
     }
-    var cos_ang1 =
-      vectorList[0].dot(vectorList[1]) /
-      (vectorList[0].length() * vectorList[1].length())
-    var cos_ang2 =
-      vectorList[0].dot(vectorList[2]) /
-      (vectorList[0].length() * vectorList[2].length())
-    var cos_ang3 =
-      vectorList[2].dot(vectorList[1]) /
-      (vectorList[2].length() * vectorList[1].length())
-    cos_ang1 = Math.round(cos_ang1 / 0.5) * 0.5
-    cos_ang2 = Math.round(cos_ang2 / 0.5) * 0.5
-    cos_ang3 = Math.round(cos_ang3 / 0.5) * 0.5
-    if (
-      Math.abs(cos_ang1) == 0.5 &&
-      Math.abs(cos_ang2) == 0.5 &&
-      Math.abs(cos_ang3) == 0.5
-    ) {
-      if (
-        dist[0] == 3 / Math.sqrt(2) &&
-        dist[1] == 3 / Math.sqrt(2) &&
-        dist[2] == 3 / Math.sqrt(2)
-      ) {
-        console.log('correct choice')
-        document.getElementById('output').innerHTML =
-          "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
-      } else {
-        console.log('try again')
-        document.getElementById('output').innerHTML =
-          "<span style='color: red;'>Wrong selection, please try again</span>"
-        SelectAtomList = []
-      }
-    } else if (
-      Math.abs(cos_ang2) == 0.5 &&
-      Math.abs(cos_ang1) == 0.5 &&
-      Math.abs(cos_ang3) == 0.5
-    ) {
-      if (
-        dist[0] == 3 / Math.sqrt(2) &&
-        dist[2] == 3 / Math.sqrt(2) &&
-        dist[1] == 3 / Math.sqrt(2)
-      ) {
-        console.log('correct choice')
-        document.getElementById('output').innerHTML =
-          "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
-      } else {
-        console.log('try again')
-        document.getElementById('output').innerHTML =
-          "<span style='color: red;'>Wrong selection, please try again</span>"
-        SelectAtomList = []
-      }
-    } else if (
-      Math.abs(cos_ang3) == 0 &&
-      Math.abs(cos_ang2) == 0.5 &&
-      Math.abs(cos_ang1) == 0.5
-    ) {
-      if (
-        dist[2] == 3 / Math.sqrt(2) &&
-        dist[1] == 3 / Math.sqrt(2) &&
-        dist[0] == 3 / Math.sqrt(2)
-      ) {
-        console.log('correct choice')
-        document.getElementById('output').innerHTML =
-          "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
-      } else {
-        console.log('try again')
-        document.getElementById('output').innerHTML =
-          "<span style='color: red;'>Wrong selection, please try again</span>"
-        SelectAtomList = []
-      }
+    //console.log(vectorList)
+    const latticeConstant = 3
+    const V = Math.abs(vectorList[0].dot(vectorList[1].clone().cross(vectorList[2])))
+    if(Math.abs(V - Math.pow(latticeConstant, 3) / 4) < Number.EPSILON) {
+      console.log('Correct choice')
+      document.getElementById('output').innerHTML =
+        "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
     } else {
-      console.log('try again')
+      console.log('Try again')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
       SelectAtomList = []
+      for(let i=0; i<VectorList.length;i++) {
+        scene.remove(VectorList[i])
+      }
     }
   } else if (curr_latticeID == 5) {
     if (SelectAtomList.length != 4) {
@@ -662,11 +554,11 @@ CheckLattice.addEventListener('click', function () {
 // translateList.addEventListener("click", function () {});
 
 // make the window responsive
-window.addEventListener('resize', () => {
-  renderer.setSize(container.clientWidth, container.clientHeight)
-  camera.aspect = container.clientWidth / container.clientHeight
-  camera.updateProjectionMatrix()
-})
+// window.addEventListener("resize", () => {
+//     renderer.setSize(container.clientWidth, container.clientHeight);
+//     camera.aspect = container.clientWidth / container.clientHeight;
+//     camera.updateProjectionMatrix();
+// });
 
 document.addEventListener('mouseup', function (event) {
   var pressType = event.button // 2 for right click, 0 for left clickl
