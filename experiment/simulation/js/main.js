@@ -251,10 +251,6 @@ CheckLattice.addEventListener('click', function () {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Please select correct number of atoms</span>"
-      SelectAtomList = []
-      for(let i=0; i<VectorList.length;i++) {
-        scene.remove(VectorList[i])
-      }
     }
     for (let i = 0; i < 2; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -279,10 +275,6 @@ CheckLattice.addEventListener('click', function () {
       console.log('Try again')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
-      SelectAtomList = []
-      for(let i=0; i<VectorList.length;i++) {
-        scene.remove(VectorList[i])
-      }
     }
 
   } else if (curr_latticeID == 1) {
@@ -291,10 +283,6 @@ CheckLattice.addEventListener('click', function () {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Please select correct number of atoms</span>"
-      SelectAtomList = []
-      for(let i=0; i<VectorList.length;i++) {
-        scene.remove(VectorList[i])
-      }
     }
     for (let i = 0; i < 2; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -316,10 +304,6 @@ CheckLattice.addEventListener('click', function () {
       console.log('Try again')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
-      SelectAtomList = []
-      for(let i=0; i<VectorList.length;i++) {
-        scene.remove(VectorList[i])
-      }
     }
   } else if (curr_latticeID == 2) {
     var vectorList = []
@@ -328,10 +312,6 @@ CheckLattice.addEventListener('click', function () {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Please select correct number of atoms</span>"
-      SelectAtomList = []
-      for(let i=0; i<VectorList.length;i++) {
-        scene.remove(VectorList[i])
-      }
     }
     for (let i = 0; i < 3; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -352,10 +332,6 @@ CheckLattice.addEventListener('click', function () {
       console.log('Try again')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
-      SelectAtomList = []
-      for(let i=0; i<VectorList.length;i++) {
-        scene.remove(VectorList[i])
-      }
     }
   } else if (curr_latticeID == 3) {
     var vectorList = []
@@ -364,10 +340,6 @@ CheckLattice.addEventListener('click', function () {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Please select correct number of atoms</span>"
-      SelectAtomList = []
-      for(let i=0; i<VectorList.length;i++) {
-        scene.remove(VectorList[i])
-      }
     }
     for (let i = 0; i < 3; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -391,10 +363,6 @@ CheckLattice.addEventListener('click', function () {
       console.log('Try again')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
-      SelectAtomList = []
-      for(let i=0; i<VectorList.length;i++) {
-        scene.remove(VectorList[i])
-      }
     }
   } else if (curr_latticeID == 4) {
     var vectorList = []
@@ -403,10 +371,6 @@ CheckLattice.addEventListener('click', function () {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Please select correct number of atoms</span>"
-      SelectAtomList = []
-      for(let i=0; i<VectorList.length;i++) {
-        scene.remove(VectorList[i])
-      }
     }
     for (let i = 0; i < 3; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -428,10 +392,6 @@ CheckLattice.addEventListener('click', function () {
       console.log('Try again')
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
-      SelectAtomList = []
-      for(let i=0; i<VectorList.length;i++) {
-        scene.remove(VectorList[i])
-      }
     }
   } else if (curr_latticeID == 5) {
     if (SelectAtomList.length != 4) {
