@@ -212,7 +212,11 @@ currentLatticeElement.addEventListener('click', function () {
     scene.remove(HullMeshList[i])
   }
   HullMeshList = []
-
+  for (let i=0; i < VectorList.length; i++) {
+    scene.remove(Vectorlist[i])
+  }
+  VectorList = []
+  
   currentAtomList = createLattice(LatticeList.indexOf(currentLattice))
 
   for (let i = 0; i < currentAtomList.length; i++) {
