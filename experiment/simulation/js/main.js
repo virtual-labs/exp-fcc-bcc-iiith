@@ -195,7 +195,7 @@ const LatticeList = [
 var currentLatticeElement = document.getElementById('LatticeList')
 var currentLattice =
   currentLatticeElement.options[currentLatticeElement.selectedIndex].text
-
+curr_latticeID = LatticeList.indexOf(currentLattice)
 let currentAtomList = createLattice(LatticeList.indexOf(currentLattice))
 for (let i = 0; i < currentAtomList.length; i++) {
   scene.add(currentAtomList[i])
@@ -204,24 +204,28 @@ for (let i = 0; i < currentAtomList.length; i++) {
 currentLatticeElement.addEventListener('click', function () {
   currentLattice =
     currentLatticeElement.options[currentLatticeElement.selectedIndex].text
-  for (let i = 0; i < currentAtomList.length; i++) {
-    scene.remove(atomList[i])
-  }
-  atomList = []
-  for (let i = 0; i < HullMeshList.length; i++) {
-    scene.remove(HullMeshList[i])
-  }
-  HullMeshList = []
-  for (let i=0; i < VectorList.length; i++) {
-    scene.remove(Vectorlist[i])
-  }
-  VectorList = []
+  if(curr_latticeID != LatticeList.indexOf(currentLattice)) {
+    for (let i = 0; i < currentAtomList.length; i++) {
+      scene.remove(atomList[i])
+    }
+    atomList = []
+    for (let i = 0; i < HullMeshList.length; i++) {
+      scene.remove(HullMeshList[i])
+    }
+    HullMeshList = []
+    for (let i=0; i < VectorList.length; i++) {
+      scene.remove(VectorList[i])
+    }
+    VectorList = []
+    
+    currentAtomList = createLattice(LatticeList.indexOf(currentLattice))
   
-  currentAtomList = createLattice(LatticeList.indexOf(currentLattice))
-
-  for (let i = 0; i < currentAtomList.length; i++) {
-    scene.add(currentAtomList[i])
-    atomList.push(currentAtomList[i])
+    for (let i = 0; i < currentAtomList.length; i++) {
+      scene.add(currentAtomList[i])
+      atomList.push(currentAtomList[i])
+    }
+    curr_latticeID = LatticeList.indexOf(currentLattice)
+    document.getElementById('output').innerHTML = ""
   }
 })
 
