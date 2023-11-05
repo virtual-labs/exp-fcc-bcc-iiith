@@ -409,7 +409,7 @@ CheckLattice.addEventListener('click', function () {
       SelectAtomList = []
     } else {
       document.getElementById('output').innerHTML =
-        "<span style='color: yellow;'>The selected atoms do not create primitive vectors for this lattice!</span>"
+        "<span style='color: blue;'>Wrong selection since primitive vectors do not exist for this lattice!</span>"
     }
   }
 })
