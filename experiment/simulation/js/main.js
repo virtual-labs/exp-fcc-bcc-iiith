@@ -363,7 +363,7 @@ CheckLattice.addEventListener('click', function () {
     }
     const latticeConstant = 4
     const V = Math.abs(vectorList[0].dot(vectorList[1].clone().cross(vectorList[2])))
-    if(Math.abs(V - Math.pow(latticeConstant, 3) / (2 * Math.sqrt(2))) < Number.EPSILON) {
+    if(Math.abs(V - (latticeConstant / (3 * Math.sqrt(3)))) < 3 * Number.EPSILON) {
       console.log('Correct choice')
       document.getElementById('output').innerHTML =
         "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
