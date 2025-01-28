@@ -1,22 +1,33 @@
-### Procedure
+## Procedure
 This experiment is about finding the primitive vectors for a given lattice. In theory, a lattice is infinite, but here we have a finite lattice. For a finite lattice with $N$ sites, the Bravais lattice definition is changed slightly as
 $$R = n_{1}a_{1} + n_{2}a_{2} + n_{3}a_{3}$$
 where $0 \leq n_{1} < N_{1}$, $0 \leq n_{2} < N_{2}$, $0 \leq n_{3} < N_{3}$ and $N = N_{1}N_{2}N_{3}$
 <br>
 The experiment contains 6 lattices which are square, rectangular, simple cubic, body centered cubic, face centered cubic and honeycomb lattice. The first two lattices are planar lattices, meaning they only extend in two dimensions. It is to be noted that the number of primitive vectors $d$ is equal to the number of dimensions of the lattice and hence the first two lattices have **only two** primitve vectors.
 <br>
-#### Finding primitive vectors
-Primtive vectors can usually be found with ease for simple lattices, usually the vectors being the coordinate axes themselves. For the more complex lattices, viewing the vectors as translations will give a more clear picture. The vectors picked should encorporate lattice points in all directions from the origin. Satisying this condition alone helps identify the primtive vectors for the most part. Once the directions have been set, find the unit distance between lattice points in that direction by finding the closest lattice point in that direction. The vector now so obtained is the primitive vector that is required. 
+### Finding Primitive Vectors
+Primitive vectors define the repeating unit of a lattice in all dimensions. For simple lattices, these vectors often align with the coordinate axes. For more complex lattices, the following guidelines apply:
+- **View Primitive Vectors as Translations**: Primitive vectors should allow translation to all lattice points in space.
+- **Choose Appropriate Directions**: Select directions that include lattice points in all required dimensions.
+- **Measure Unit Distances**: Identify the nearest lattice point in the chosen direction to determine the magnitude of the vector.
+The vectors obtained through this process are the primitive vectors of the lattice.
 <br> <br>
-The steps to the experiment are given below
-- The interface will contain a canvas in which the different finite lattices in question are shown.
-- The interface contains a dropdown to select lattice, a button to select atoms (which is a toggle switch), a button to clear your choices and a button to check the choice made.
-- In the select mode, left click can be used to select an atom and right click can be used to de-select an atom. 
-- It is expected that atoms are selected sequentially as head and tail of primitive vectors of the lattice. It is okay to have a common atom as the tail for many vectors. It is expected that the right head atoms are chosen given a common tail, to create the primitive vectors. 
-- If the vectors obtained do not have a common origin, they are brought to a common origin during evaluation of the selection, retaining the validity of the selection if the magnitudes and directions of the vectors obtained are correct.
-- Once selections are made in the above said order, the selections can be evaluated. 
+### Steps to Perform the Experiment 
+- Explore the interface
+  - The interface features a canvas displaying finite lattices.
+  - Use the dropdown to select a lattice.
+- Tools Provided:
+  - Select Mode: Use left-click to select lattice points and right-click to deselect lattice points.
+  - Clear Button: Reset all your selections.
+  - Check Button: Evaluate the correctness of your selected primitive vectors.
+- Make selections:
+  - Select lattice points sequentially as the head and tail of primitive vectors.
+  - A single lattice point can serve as the common tail for multiple vectors.
+- Evaluate Vectors
+  - Primitive vectors must originate from a common origin.
+  - During evaluation, vectors are adjusted to a common origin if needed. Their directions and magnitudes are used to validate the selection. 
 <br>
 The last lattice, the honeycomb lattice is a counter case to the Bravais lattice definition. It has been proven that the honeycomb lattice is **not** a Bravais lattice. Since there is no right combination of atoms that will give the primitve vectors, it can never be a Bravais lattice. It is left as an exercise for the user to prove why it is impossible to adhere to the Bravais lattice definition for the case of a honeycomb lattice.
 
 #### Note
-Some lattices have been showed with an atom radius that is smaller than the mathematically proven one to help with the visibility of the lattice points to the user.
+To improve visibility, some lattices display lattice points with smaller radii than the actual values. This adjustment is intended to make selection easier for the user.
