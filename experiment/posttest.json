@@ -2,87 +2,87 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "How many primitive vectors does a Bravais lattice of n dimenions have?",
+      "question": "What is the coordination number of a face-centered cubic (FCC) crystal structure?",
       "answers": {
-        "a": "1",
-        "b": "n-1",
-        "c": "n",
-        "d": "n/2"
+        "a": "4",
+        "b": "8",
+        "c": "12",
+        "d": "16"
       },
       "explanations": {
-        "c": "A Bravais lattice of n dimensions has n primitive vectors"
+        "c": "FCC structures have 12 nearest neighbors for each atom, hence a coordination number of 12."
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
     },
     {
-      "question": "How many primitive vectors does the honeycomb lattice have?",
+      "question": "What is the packing efficiency of a body-centered cubic (BCC) crystal structure?",
       "answers": {
-        "a": "2",
-        "b": "3",
-        "c": "1",
-        "d": "None"
+        "a": "68%",
+        "b": "74%",
+        "c": "52%",
+        "d": "90%"
       },
       "explanations": {
-        "d": "Honeycomb lattice has no primitve vectors"
+        "a": "BCC structures have a packing efficiency of approximately 68% due to less dense atomic arrangement compared to FCC."
       },
-      "correctAnswer": "d",
+      "correctAnswer": "a",
       "difficulty": "beginner"
     },
-        {
-      "question": "If the edge length of a simple cubic lattice is \"a\" and the radius of atoms is \"r\", then which of these relations is correct?",
+    {
+      "question": "If the atomic radius in a face-centered cubic (FCC) crystal is 'r', what is the edge length of the unit cell?",
       "answers": {
-        "a": "a = r",
-        "b": "a = (r/2)",
-        "c": "a = 2r",
-        "d": "None of the above"
+        "a": "2r",
+        "b": "√2 * r",
+        "c": "4r/√2",
+        "d": "4r/√3"
       },
       "explanations": {
-        "c": "An edge of a simple cubic lattice has only 2 atoms. Hence the sum of radius of these two atoms must be equal to the edge length"
+        "d": "The edge length of an FCC unit cell is calculated as 4r/√3 based on the diagonal relationship in the cubic geometry."
       },
-      "correctAnswer": "c",
+      "correctAnswer": "d",
       "difficulty": "intermediate"
     },
-        {
-      "question": "Look up about brick wall lattice. Is it a Bravais lattice?",
+    {
+      "question": "Which of the following crystal structures has the highest packing efficiency?",
       "answers": {
-        "a": "Yes",
-        "b": "It is not in most cases",
-        "c": "No",
-        "d": "All of the above"
+        "a": "Simple cubic",
+        "b": "Body-centered cubic",
+        "c": "Face-centered cubic",
+        "d": "Hexagonal close-packed"
       },
       "explanations": {
-        "c": "The standard brick wall lattice is not a Bravais lattice"
+        "d": "Hexagonal close-packed (HCP) and FCC structures have the highest packing efficiency of 74%, higher than simple cubic or BCC."
       },
-      "correctAnswer": "c",
+      "correctAnswer": "d",
       "difficulty": "intermediate"
     },
-        {
-      "question": "What are the angles between the primitive vectors of a BCC?(in degrees)",
+    {
+      "question": "What is the Miller index of a plane that cuts through the x-axis at 1a, the y-axis at 2a, and the z-axis at ∞?",
       "answers": {
-        "a": "90,90,54.7",
-        "b": "90,45,90",
-        "c": "60,60,60",
-        "d": "None of the above"
+        "a": "(1 2 0)",
+        "b": "(2 1 0)",
+        "c": "(2 1 ∞)",
+        "d": "(1 1 0)"
       },
       "explanations": {
-        "a": "The primitive vectors are along [1,0,0],[0,1,0],[0.5,0.5,0.5]"
+        "a": "The reciprocals of intercepts are taken to find the Miller indices: 1/1, 1/2, and 1/∞ result in (1 2 0)."
       },
       "correctAnswer": "a",
       "difficulty": "advanced"
     },
-        {
-      "question": "What are the angles between the primitive vectors of a FCC?(in degrees)",
+    {
+      "question": "In a body-centered cubic (BCC) crystal structure, how many atoms are effectively contained within one unit cell?",
       "answers": {
-        "a": "90,90,54.7",
-        "b": "75,75,75",
-        "c": "60,60,60",
-        "d": "None of the above"
+        "a": "1",
+        "b": "2",
+        "c": "4",
+        "d": "6"
       },
       "explanations": {
-        "c": "The primitive vectors are along [1,1,0],[1,0,1],[0,1,1]"
+        "b": "BCC contains 1 atom at the center and 1/8th of each of the 8 corner atoms, effectively summing to 2 atoms per unit cell."
       },
-      "correctAnswer": "c",
+      "correctAnswer": "b",
       "difficulty": "advanced"
     }
   ]

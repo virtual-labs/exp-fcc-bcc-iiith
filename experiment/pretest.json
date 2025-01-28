@@ -2,91 +2,87 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "What is a Bravais lattice?",
+      "question": "Which of the following is a characteristic of a face-centered cubic (FCC) crystal structure?",
       "answers": {
-        "a": "A regular arrangement of atoms in a crystal",
-        "b": "A lattice that follows the Bravais rules",
-        "c": "A repeating pattern of arrangement of atoms with all points being equivalent",
-        "d": "None of the above"
+        "a": "Atoms are located only at the corners of the cube",
+        "b": "Atoms are located at the corners and at the center of the cube",
+        "c": "Atoms are located at the corners and at the center of each face",
+        "d": "Atoms are located only at the center of the cube"
       },
       "explanations": {
-        "a": "Not all regular arrangement of atoms can be classfied as a Bravais lattice",
-        "c": "This is the correct definition of a Bravais lattice"
+        "c": "FCC structures have atoms at the corners of the cube and at the center of each face, providing a highly efficient packing arrangement."
       },
       "correctAnswer": "c",
       "difficulty": "beginner"
     },
     {
-      "question": "What are lattice points?",
+      "question": "What is the coordination number of a simple cubic (SC) crystal structure?",
       "answers": {
-        "a": "Points that make a lattice are called latice points",
-        "b": "Atoms that belong to a Bravais lattice",
-        "c": "Both (a) and (b)",
-        "d": "None of the above"
+        "a": "4",
+        "b": "6",
+        "c": "8",
+        "d": "12"
       },
       "explanations": {
-        "a": "This is the correct definition",
-        "b": "Atoms do not need to belong to a Bravais lattice to be lattice points in general"
+        "b": "A simple cubic structure has a coordination number of 6 as each atom is surrounded by six nearest neighbors."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
-        {
-      "question": "Which of these are Bravais lattices?",
+    {
+      "question": "What fraction of an atom at a corner of a unit cell belongs to that cell?",
       "answers": {
-        "a": "Square lattice",
-        "b": "Cubic lattice",
-        "c": "Rectangular lattice",
-        "d": "All of above"
+        "a": "1/2",
+        "b": "1/4",
+        "c": "1/8",
+        "d": "1"
       },
       "explanations": {
-        "d": "All the lattices mentioned here are standard two dimensional Bravais lattices"
+        "c": "An atom at a corner is shared by 8 neighboring unit cells, so only 1/8th of it belongs to a single unit cell."
       },
-      "correctAnswer": "d",
+      "correctAnswer": "c",
       "difficulty": "intermediate"
     },
-        {
-      "question": "With regard to primitive vectors, which of these options are true?",
+    {
+      "question": "What is the relationship between the atomic radius (r) and the edge length (a) in a body-centered cubic (BCC) crystal structure?",
       "answers": {
-        "a": "They are vectors that are perpendicular to each other",
-        "b": "They are the vectors that can be used to re-construct a Bravais lattice",
-        "c": "Bravais lattices necessarily have 3 primitve vectors",
-        "d": "All of the above"
+        "a": "a = 2r",
+        "b": "a = 4r/√3",
+        "c": "a = √2 * r",
+        "d": "a = r"
       },
       "explanations": {
-        "a": "Primitive vectors need not be perpendicular to each other",
-        "c": "A Bravais lattice of two dimensions only has 2 primitive vectors"
+        "b": "In a BCC crystal structure, the diagonal across the cube passes through 4 atomic radii, giving the relationship a = 4r/√3."
       },
       "correctAnswer": "b",
       "difficulty": "intermediate"
     },
-        {
-      "question": "For a cubic lattice with dimensions of 1 unit, which of these vectors can be used as primitive vectors? (Assuming that the origin is at (0,0,0))",
+    {
+      "question": "Which crystal structure is known for having the lowest packing efficiency?",
       "answers": {
-        "a": "[0.5,0,0],[0,0.5,0],[0,0,0.5]",
-        "b": "[1,0,0],[0,1,0],[0,0,1]",
-        "c": "[-1,0,0],[0,-1,0],[0,0,-1]",
-        "d": "Both (b) and (c)"
+        "a": "Face-centered cubic",
+        "b": "Body-centered cubic",
+        "c": "Simple cubic",
+        "d": "Hexagonal close-packed"
       },
       "explanations": {
-        "a": "Using these primitive vectors reaches to points in space that do not contain lattice points",
-        "d": "Both these choices can reach every lattice point"
+        "c": "The simple cubic structure has the lowest packing efficiency of 52% due to its loose atomic arrangement."
       },
-      "correctAnswer": "d",
+      "correctAnswer": "c",
       "difficulty": "advanced"
     },
-        {
-      "question": "Which of these is a necessity for a primitive vector?",
+    {
+      "question": "How many atoms are present in a single unit cell of a face-centered cubic (FCC) structure?",
       "answers": {
-        "a": "The magnitude of the vector needs to be equal to the minimal distance between lattice points",
-        "b": "Angle between two primitive vectors has to be less than or equal to 90 degrees",
-        "c": "Both (a) and (b)",
-        "d": "None of the above"
+        "a": "1",
+        "b": "2",
+        "c": "4",
+        "d": "8"
       },
       "explanations": {
-        "a": "In the case where the linear combination only involves that one primitve vector, then there should necessarily be a lattice point there"
+        "c": "An FCC unit cell contains 8 corner atoms (each contributing 1/8th) and 6 face atoms (each contributing 1/2), summing to 4 atoms."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "c",
       "difficulty": "advanced"
     }
   ]
