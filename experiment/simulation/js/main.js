@@ -105,22 +105,24 @@ function getMouseCoords(event) {
     ) *
       2 +
     1
-  // mouse.x = ( ( event.clientX - container.offsetLeft ) / container.clientWidth ) * 2 - 1;
-  // mouse.y = - ( ( event.clientY - container.offsetTop ) / container.clientHeight ) * 2 + 1;
-  // mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-  // mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-  // console.log(mouse);
   return mouse
 }
 var mouse = new THREE.Vector2()
-//  detect mouse click
+
+//  detect mouse click with jitter tolerance
 let drag = false
+let startX = 0
+let startY = 0
+
 document.addEventListener('mousedown', function (event) {
   drag = false
+  startX = event.clientX
+  startY = event.clientY
   mouse = getMouseCoords(event)
 })
+
 document.addEventListener('mousemove', function (event) {
-  drag = true
+  // We check for drag distance in mouseup instead of setting true here immediately
   mouse = getMouseCoords(event)
 })
 
@@ -240,13 +242,6 @@ ClearLattice.addEventListener('click', function () {
   //add vector removal here
 })
 
-// let CameraMode = document.getElementById('ToggleCamera')
-// CameraMode.addEventListener('click', function() {
-//   console.log('Clicked camera toggle')
-//   if(CameraMode.checked) {
-//     console.log("yes")
-//   }
-// })
 // respond to check selected lattice
 const CheckLattice = document.getElementById('CheckLattice')
 CheckLattice.addEventListener('click', function () {
@@ -274,7 +269,6 @@ CheckLattice.addEventListener('click', function () {
     const determinant = vectorList[0].x * vectorList[1].z - vectorList[0].z * vectorList[1].x;
     const latticeConstantSq = latticeConstant * latticeConstant;
 
-    //const crossProduct = new THREE.Vector3().crossVectors(vectorList[0], vectorList[1]);
     if(Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON) {
       console.log('Correct choice')
       document.getElementById('output').innerHTML =
@@ -301,7 +295,6 @@ CheckLattice.addEventListener('click', function () {
       var res = pos2.clone().add(neg)
       vectorList.push(res)
     }
-    //console.log(vectorList)
     const determinant = vectorList[0].x * vectorList[1].z - vectorList[0].z * vectorList[1].x;
     const latticeConstantSq = 10
     if(Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON) {
@@ -389,7 +382,6 @@ CheckLattice.addEventListener('click', function () {
       var res = pos2.clone().add(neg)
       vectorList.push(res)
     }
-    //console.log(vectorList)
     const latticeConstant = 3
     const V = Math.abs(vectorList[0].dot(vectorList[1].clone().cross(vectorList[2])))
     if(Math.abs(V - Math.pow(latticeConstant, 3) / 4) < Number.EPSILON) {
@@ -414,121 +406,16 @@ CheckLattice.addEventListener('click', function () {
   }
 })
 
-// respond to select all atoms
-// const addSelectAll = document.getElementById("SelectAll");
-// addSelectAll.addEventListener("click", function () {
-//     if (action != "selectAll") {
-//         action = "selectAll";
-//     } else {
-//         action = "";
-//         SelectAtomList = [];
-//     }
-// });
-
-// respond to check for SCP
-// const addCheckSC = document.getElementById("CheckSC");
-// addCheckSC.addEventListener("click", function () {
-//     console.log("checking SCP packing");
-//     var checkresult = checkSCP(SelectAtomList);
-//     alert(checkresult);
-// });
-
-// respond to add atom by coordinate
-// const formAdd = document.getElementById("addatom");
-// formAdd.addEventListener("submit", function () {
-//     console.log("adding atom");
-//     var vec = formAdd.elements;
-//     var AddVec = new THREE.Vector3(
-//         parseFloat(vec[0].value),
-//         parseFloat(vec[1].value),
-//         parseFloat(vec[2].value)
-//     );
-//     var addedatom = addSphereAtCoordinate(AddVec, atomtype);
-//     console.log(AddVec, addedatom);
-//     scene.add(addedatom);
-//     atomList.push(addedatom);
-// });
-
-// respond to add dummy atom by coordinate
-// const formAdddummy = document.getElementById("adddummyatom");
-// formAdddummy.addEventListener("submit", function () {
-//     console.log("adding dummy atom");
-//     var vec = formAdddummy.elements;
-//     var AddVec = new THREE.Vector3(
-//         parseFloat(vec[0].value),
-//         parseFloat(vec[1].value),
-//         parseFloat(vec[2].value)
-//     );
-//     var addedatom = addSphereAtCoordinate(AddVec, "dummy");
-//     console.log(AddVec, addedatom);
-//     scene.add(addedatom);
-//     atomList.push(addedatom);
-// });
-
-// respond to repeat
-// const formRepeat = document.getElementById("repeat");
-// formRepeat.addEventListener("submit", function () {
-//     console.log("repeating");
-//     var vec = formRepeat.elements;
-//     var repeatVec = new THREE.Vector3(
-//         parseFloat(vec[0].value),
-//         parseFloat(vec[1].value),
-//         parseFloat(vec[2].value)
-//     );
-//     var newAtoms = RepeatPattern(SelectAtomList, repeatVec);
-//     console.log(repeatVec, newAtoms);
-//     for (let i = 0; i < newAtoms.length; i++) {
-//         scene.add(newAtoms[i]);
-//         atomList.push(newAtoms[i]);
-//     }
-//     SelectAtomList = newAtoms;
-// });
-
-// respond to translate
-// const formTranslate = document.getElementById("translate");
-// formTranslate.addEventListener("submit", function () {
-//     console.log("translating");
-//     var vec = formTranslate.elements;
-//     var translateVec = new THREE.Vector3(
-//         parseFloat(vec[0].value),
-//         parseFloat(vec[1].value),
-//         parseFloat(vec[2].value)
-//     );
-//     var count = parseFloat(vec[3].value);
-//     var newAtoms = TranslatePattern(SelectAtomList, translateVec, count);
-//     console.log(translateVec, newAtoms);
-//     for (let i = 0; i < newAtoms.length; i++) {
-//         scene.add(newAtoms[i]);
-//         atomList.push(newAtoms[i]);
-//     }
-//     SelectAtomList = newAtoms;
-// });
-
-// respond to move
-// const formMove = document.getElementById("move");
-// formMove.addEventListener("submit", function () {
-//     console.log("moving");
-//     var vec = formMove.elements;
-//     var moveVector = new THREE.Vector3(
-//         parseFloat(vec[0].value),
-//         parseFloat(vec[1].value),
-//         parseFloat(vec[2].value)
-//     );
-//     moveSelectList(SelectAtomList, moveVector);
-//     console.log(moveVector, SelectAtomList);
-// });
-
-// const translateList = document.getElementById("TranslatePattern");
-// translateList.addEventListener("click", function () {});
-
-// make the window responsive
-// window.addEventListener("resize", () => {
-//     renderer.setSize(container.clientWidth, container.clientHeight);
-//     camera.aspect = container.clientWidth / container.clientHeight;
-//     camera.updateProjectionMatrix();
-// });
-
 document.addEventListener('mouseup', function (event) {
+  // Logic for jitter tolerance (5 pixels)
+  let diffX = Math.abs(event.clientX - startX)
+  let diffY = Math.abs(event.clientY - startY)
+  if (diffX < 5 && diffY < 5) {
+    drag = false
+  } else {
+    drag = true
+  }
+
   var pressType = event.button // 2 for right click, 0 for left clickl
   if (drag == false) {
     // if the action is add atom
@@ -601,13 +488,6 @@ document.addEventListener('keydown', function (event) {
 // render the scene and animate
 var render = function () {
   highlightSelectList(SelectAtomList, atomList)
-  // updateButtonCSS(action);
-
-  //   currentLatticeElement = document.getElementById('LatticeList')
-  //   currentLattice =
-  //     currentLatticeElement.options[currentLatticeElement.selectedIndex].text
-
-  //   console.log(currentLattice)
   INTERSECTED = CheckHover(mouse, camera, atomList, INTERSECTED)
   requestAnimationFrame(render)
   controls.update()
