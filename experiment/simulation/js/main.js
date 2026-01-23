@@ -188,7 +188,7 @@ Slider.oninput = function () {
 const LatticeList = [
   'Square Lattice',
   'Rectangular Lattice',
-  'Cubic Lattice',
+  'Simple Cubic Lattice',
   'BCC Lattice',
   'FCC Lattice',
   'Honeycomb Lattice',
