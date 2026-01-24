@@ -1,0 +1,89 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "Which of the following is a characteristic of a face-centered cubic (FCC) crystal structure?",
+      "answers": {
+        "a": "Atoms are located only at the corners of the cube",
+        "b": "Atoms are located at the corners and at the center of the cube",
+        "c": "Atoms are located at the corners and at the center of each face",
+        "d": "Atoms are located only at the center of the cube"
+      },
+      "explanations": {
+        "c": "FCC structures have atoms at the corners of the cube and at the center of each face, providing a highly efficient packing arrangement."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is the coordination number of a simple cubic (SC) crystal structure?",
+      "answers": {
+        "a": "4",
+        "b": "6",
+        "c": "8",
+        "d": "12"
+      },
+      "explanations": {
+        "b": "A simple cubic structure has a coordination number of 6 as each atom is surrounded by six nearest neighbors."
+      },
+      "correctAnswer": "b",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What fraction of an atom at a corner of a unit cell belongs to that cell?",
+      "answers": {
+        "a": "1/2",
+        "b": "1/4",
+        "c": "1/8",
+        "d": "1"
+      },
+      "explanations": {
+        "c": "An atom at a corner is shared by 8 neighboring unit cells, so only 1/8th of it belongs to a single unit cell."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What is the relationship between the atomic radius (r) and the edge length (a) in a body-centered cubic (BCC) crystal structure?",
+      "answers": {
+        "a": "a = 2r",
+        "b": "a = 4r/√3",
+        "c": "a = √2 * r",
+        "d": "a = r"
+      },
+      "explanations": {
+        "b": "In a BCC crystal structure, the diagonal across the cube passes through 4 atomic radii, giving the relationship a = 4r/√3."
+      },
+      "correctAnswer": "b",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which crystal structure is known for having the lowest packing efficiency?",
+      "answers": {
+        "a": "Face-centered cubic",
+        "b": "Body-centered cubic",
+        "c": "Simple cubic",
+        "d": "Hexagonal close-packed"
+      },
+      "explanations": {
+        "c": "The simple cubic structure has the lowest packing efficiency of 52% due to its loose atomic arrangement."
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "How many atoms are present in a single unit cell of a face-centered cubic (FCC) structure?",
+      "answers": {
+        "a": "1",
+        "b": "2",
+        "c": "4",
+        "d": "8"
+      },
+      "explanations": {
+        "c": "An FCC unit cell contains 8 corner atoms (each contributing 1/8th) and 6 face atoms (each contributing 1/2), summing to 4 atoms."
+      },
+      "correctAnswer": "c",
+      "difficulty": "advanced"
+    }
+  ]
+}
