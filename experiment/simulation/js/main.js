@@ -91,20 +91,12 @@ Checked.addEventListener('click', function () {
 // to check the current object which keyboard points to
 let INTERSECTED
 
+// FIX: Updated mouse coordinates to handle scrolling correctly
 function getMouseCoords(event) {
   var mouse = new THREE.Vector2()
-  mouse.x =
-    ((event.clientX - renderer.domElement.offsetLeft) /
-      renderer.domElement.clientWidth) *
-      2 -
-    1
-  mouse.y =
-    -(
-      (event.clientY - renderer.domElement.offsetTop) /
-      renderer.domElement.clientHeight
-    ) *
-      2 +
-    1
+  var rect = renderer.domElement.getBoundingClientRect()
+  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+  mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
   return mouse
 }
 var mouse = new THREE.Vector2()
@@ -188,15 +180,16 @@ Slider.oninput = function () {
 const LatticeList = [
   'Square Lattice',
   'Rectangular Lattice',
-  'Simple Cubic Lattice',
+  'Cubic Lattice',
   'BCC Lattice',
   'FCC Lattice',
   'Honeycomb Lattice',
 ]
 
+// FIX: Use .value to match correctly with "Cubic Lattice"
 var currentLatticeElement = document.getElementById('LatticeList')
 var currentLattice =
-  currentLatticeElement.options[currentLatticeElement.selectedIndex].text
+  currentLatticeElement.options[currentLatticeElement.selectedIndex].value
 curr_latticeID = LatticeList.indexOf(currentLattice)
 let currentAtomList = createLattice(LatticeList.indexOf(currentLattice))
 for (let i = 0; i < currentAtomList.length; i++) {
@@ -204,9 +197,11 @@ for (let i = 0; i < currentAtomList.length; i++) {
   atomList.push(currentAtomList[i])
 }
 currentLatticeElement.addEventListener('click', function () {
+  // FIX: Use .value here too
   currentLattice =
-    currentLatticeElement.options[currentLatticeElement.selectedIndex].text
-  if(curr_latticeID != LatticeList.indexOf(currentLattice)) {
+    currentLatticeElement.options[currentLatticeElement.selectedIndex].value
+
+  if (curr_latticeID != LatticeList.indexOf(currentLattice)) {
     for (let i = 0; i < currentAtomList.length; i++) {
       scene.remove(atomList[i])
     }
@@ -215,19 +210,22 @@ currentLatticeElement.addEventListener('click', function () {
       scene.remove(HullMeshList[i])
     }
     HullMeshList = []
-    for (let i=0; i < VectorList.length; i++) {
+    for (let i = 0; i < VectorList.length; i++) {
       scene.remove(VectorList[i])
     }
     VectorList = []
     
+    // FIX: Clear the selection list when switching lattices
+    SelectAtomList = []
+
     currentAtomList = createLattice(LatticeList.indexOf(currentLattice))
-  
+
     for (let i = 0; i < currentAtomList.length; i++) {
       scene.add(currentAtomList[i])
       atomList.push(currentAtomList[i])
     }
     curr_latticeID = LatticeList.indexOf(currentLattice)
-    document.getElementById('output').innerHTML = ""
+    document.getElementById('output').innerHTML = ''
   }
 })
 
@@ -249,11 +247,15 @@ CheckLattice.addEventListener('click', function () {
   curr_latticeID = LatticeList.indexOf(currentLattice)
 
   if (curr_latticeID == 0) {
+    // SQUARE LATTICE (2D) - NEEDS 4 POINTS
     var vectorList = []
     if (SelectAtomList.length != 4) {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
-        "<span style='color: red;'>Please select correct number of atoms</span>"
+        "<span style='color: red;'>You have chosen " +
+        SelectAtomList.length +
+        ' atoms. Please choose correct number of atoms</span>'
+      return
     }
     for (let i = 0; i < 2; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -265,11 +267,14 @@ CheckLattice.addEventListener('click', function () {
       vectorList.push(res)
     }
     console.log(vectorList)
-    const latticeConstant = 2;
-    const determinant = vectorList[0].x * vectorList[1].z - vectorList[0].z * vectorList[1].x;
-    const latticeConstantSq = latticeConstant * latticeConstant;
+    const latticeConstant = 2
+    const determinant =
+      vectorList[0].x * vectorList[1].z - vectorList[0].z * vectorList[1].x
+    const latticeConstantSq = latticeConstant * latticeConstant
 
-    if(Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON) {
+    if (
+      Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON
+    ) {
       console.log('Correct choice')
       document.getElementById('output').innerHTML =
         "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
@@ -278,13 +283,16 @@ CheckLattice.addEventListener('click', function () {
       document.getElementById('output').innerHTML =
         "<span style='color: red;'>Wrong selection, please try again</span>"
     }
-
   } else if (curr_latticeID == 1) {
+    // RECTANGULAR LATTICE (2D) - NEEDS 4 POINTS
     var vectorList = []
     if (SelectAtomList.length != 4) {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
-        "<span style='color: red;'>Please select correct number of atoms</span>"
+        "<span style='color: red;'>You have chosen " +
+        SelectAtomList.length +
+        ' atoms. Please choose correct number of atoms</span>'
+      return
     }
     for (let i = 0; i < 2; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -295,9 +303,12 @@ CheckLattice.addEventListener('click', function () {
       var res = pos2.clone().add(neg)
       vectorList.push(res)
     }
-    const determinant = vectorList[0].x * vectorList[1].z - vectorList[0].z * vectorList[1].x;
+    const determinant =
+      vectorList[0].x * vectorList[1].z - vectorList[0].z * vectorList[1].x
     const latticeConstantSq = 10
-    if(Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON) {
+    if (
+      Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON
+    ) {
       console.log('Correct choice')
       document.getElementById('output').innerHTML =
         "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
@@ -307,12 +318,16 @@ CheckLattice.addEventListener('click', function () {
         "<span style='color: red;'>Wrong selection, please try again</span>"
     }
   } else if (curr_latticeID == 2) {
+    // CUBIC LATTICE (3D) - NEEDS 6 POINTS
     var vectorList = []
     var dist = []
     if (SelectAtomList.length != 6) {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
-        "<span style='color: red;'>Please select correct number of atoms</span>"
+        "<span style='color: red;'>You have chosen " +
+        SelectAtomList.length +
+        ' atoms. Please choose correct number of atoms</span>'
+      return
     }
     for (let i = 0; i < 3; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -323,9 +338,11 @@ CheckLattice.addEventListener('click', function () {
       var res = pos2.clone().add(neg)
       vectorList.push(res)
     }
-    const determinant = vectorList[0].dot(vectorList[1].cross(vectorList[2]));
+    const determinant = vectorList[0].dot(vectorList[1].cross(vectorList[2]))
     const latticeConstantSq = 8
-    if(Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON) {
+    if (
+      Math.abs(Math.abs(determinant) - latticeConstantSq) < Number.EPSILON
+    ) {
       console.log('Correct choice')
       document.getElementById('output').innerHTML =
         "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
@@ -335,12 +352,16 @@ CheckLattice.addEventListener('click', function () {
         "<span style='color: red;'>Wrong selection, please try again</span>"
     }
   } else if (curr_latticeID == 3) {
+    // BCC LATTICE (3D) - NEEDS 6 POINTS
     var vectorList = []
     var dist = []
     if (SelectAtomList.length != 6) {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
-        "<span style='color: red;'>Please select correct number of atoms</span>"
+        "<span style='color: red;'>You have chosen " +
+        SelectAtomList.length +
+        ' atoms. Please choose correct number of atoms</span>'
+      return
     }
     for (let i = 0; i < 3; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -355,8 +376,13 @@ CheckLattice.addEventListener('click', function () {
       vectorList.push(unit)
     }
     const latticeConstant = 4
-    const V = Math.abs(vectorList[0].dot(vectorList[1].clone().cross(vectorList[2])))
-    if(Math.abs(V - (latticeConstant / (3 * Math.sqrt(3)))) < 3 * Number.EPSILON) {
+    const V = Math.abs(
+      vectorList[0].dot(vectorList[1].clone().cross(vectorList[2])),
+    )
+    if (
+      Math.abs(V - latticeConstant / (3 * Math.sqrt(3))) <
+      3 * Number.EPSILON
+    ) {
       console.log('Correct choice')
       document.getElementById('output').innerHTML =
         "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
@@ -366,12 +392,16 @@ CheckLattice.addEventListener('click', function () {
         "<span style='color: red;'>Wrong selection, please try again</span>"
     }
   } else if (curr_latticeID == 4) {
+    // FCC LATTICE (3D) - NEEDS 6 POINTS
     var vectorList = []
     var dist = []
     if (SelectAtomList.length != 6) {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
-        "<span style='color: red;'>Please select correct number of atoms</span>"
+        "<span style='color: red;'>You have chosen " +
+        SelectAtomList.length +
+        ' atoms. Please choose correct number of atoms</span>'
+      return
     }
     for (let i = 0; i < 3; i++) {
       var atom1 = SelectAtomList[2 * i]
@@ -383,8 +413,10 @@ CheckLattice.addEventListener('click', function () {
       vectorList.push(res)
     }
     const latticeConstant = 3
-    const V = Math.abs(vectorList[0].dot(vectorList[1].clone().cross(vectorList[2])))
-    if(Math.abs(V - Math.pow(latticeConstant, 3) / 4) < Number.EPSILON) {
+    const V = Math.abs(
+      vectorList[0].dot(vectorList[1].clone().cross(vectorList[2])),
+    )
+    if (Math.abs(V - Math.pow(latticeConstant, 3) / 4) < Number.EPSILON) {
       console.log('Correct choice')
       document.getElementById('output').innerHTML =
         "<span style='color: green;'>Correct choice of atoms! Please proceed to the next lattice</span>"
@@ -394,11 +426,14 @@ CheckLattice.addEventListener('click', function () {
         "<span style='color: red;'>Wrong selection, please try again</span>"
     }
   } else if (curr_latticeID == 5) {
+    // HONEYCOMB LATTICE (2D) - NEEDS 4 POINTS
     if (SelectAtomList.length != 4) {
       console.log('Please select correct number of atoms')
       document.getElementById('output').innerHTML =
-        "<span style='color: red;'>Please select correct number of atoms</span>"
-      SelectAtomList = []
+        "<span style='color: red;'>You have chosen " +
+        SelectAtomList.length +
+        ' atoms. Please choose correct number of atoms</span>'
+      return
     } else {
       document.getElementById('output').innerHTML =
         "<span style='color: blue;'>Wrong selection since primitive vectors do not exist for this lattice!</span>"
