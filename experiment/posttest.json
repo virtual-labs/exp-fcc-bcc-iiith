@@ -2,38 +2,88 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "What is the coordination number of a face-centered cubic (FCC) crystal structure?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "4",
+        "b": "8",
+        "c": "12",
+        "d": "16"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "c": "FCC structures have 12 nearest neighbors for each atom, hence a coordination number of 12."
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "What is the packing efficiency of a body-centered cubic (BCC) crystal structure?",
+      "answers": {
+        "a": "68%",
+        "b": "74%",
+        "c": "52%",
+        "d": "90%"
+      },
+      "explanations": {
+        "a": "BCC structures have a packing efficiency of approximately 68% due to less dense atomic arrangement compared to FCC."
       },
       "correctAnswer": "a",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "If the atomic radius in a face-centered cubic (FCC) crystal is 'r', what is the edge length of the unit cell?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "2r",
+        "b": "√2 * r",
+        "c": "4r/√2",
+        "d": "4r/√3"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "d": "The edge length of an FCC unit cell is calculated as 4r/√3 based on the diagonal relationship in the cubic geometry."
       },
-      "correctAnswer": "c",
-      "difficulty": "beginner"
+      "correctAnswer": "d",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which of the following crystal structures has the highest packing efficiency?",
+      "answers": {
+        "a": "Simple cubic",
+        "b": "Body-centered cubic",
+        "c": "Face-centered cubic",
+        "d": "Hexagonal close-packed"
+      },
+      "explanations": {
+        "d": "Hexagonal close-packed (HCP) and FCC structures have the highest packing efficiency of 74%, higher than simple cubic or BCC."
+      },
+      "correctAnswer": "d",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "What is the Miller index of a plane that cuts through the x-axis at 1a, the y-axis at 2a, and the z-axis at ∞?",
+      "answers": {
+        "a": "(1 2 0)",
+        "b": "(2 1 0)",
+        "c": "(2 1 ∞)",
+        "d": "(1 1 0)"
+      },
+      "explanations": {
+        "a": "The reciprocals of intercepts are taken to find the Miller indices: 1/1, 1/2, and 1/∞ result in (1 2 0)."
+      },
+      "correctAnswer": "a",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "In a body-centered cubic (BCC) crystal structure, how many atoms are effectively contained within one unit cell?",
+      "answers": {
+        "a": "1",
+        "b": "2",
+        "c": "4",
+        "d": "6"
+      },
+      "explanations": {
+        "b": "BCC contains 1 atom at the center and 1/8th of each of the 8 corner atoms, effectively summing to 2 atoms per unit cell."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
     }
   ]
 }
